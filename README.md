@@ -1,10 +1,11 @@
 # Componentes útiles
 
-Bienvenido! En este proyecto pienso dejar componentes medianos/grandes reutilizables. Propósito similar a [este proyecto](https://github.com/Ale6100/codigos-utiles-ap.git)
+Bienvenido! En este proyecto pienso dejar componentes interesantes reutilizables. Propósito similar a [este proyecto](https://github.com/Ale6100/codigos-utiles-ap.git)
 
 ## Componentes
 
 * DataTable.tsx | Componente capaz de renderizar una tabla con muchas funcionalidades incorporadas por defecto.
+* NotFound.tsx | Simple página de error 404 animada.
 
 ## Construido con 🛠️
 

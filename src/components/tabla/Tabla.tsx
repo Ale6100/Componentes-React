@@ -163,7 +163,7 @@ export default function Tabla() {
             "De manera predeterminada habrá un botón para ocultar o esconder las columnas que uno desee",
             "Se puede activar un botón en cada columna para ordenar las filas en su orden ascendente o descendente. También en ese mismo botón se puede ocultar la columna. Se activa con el componente DataTableColumnHeader",
             "De manera predeterminada el filtro funcionará para todos los campos, pero se puede deshabilitar para campos específicos con la propiedad enableGlobalFilter",
-            "Si se pasa un atributo Card de timo componente, servirá como componente plantilla donde se renderizarán los datos de cada fila en formato mobile",
+            "Si se pasa un atributo Card de tipo componente, servirá como componente plantilla donde se renderizarán los datos de cada fila en formato mobile",
             "Es posible ocultar columnas por defecto con el atributo columnsHidden",
             "Es posible cambiar el placeholder del filtro",
             "Es posible pasar un className para personalizar el contenedor padre",
