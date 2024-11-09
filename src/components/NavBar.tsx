@@ -4,7 +4,7 @@ export default function NavBar () {
   return (
     <header>
       <nav className="bg-gray-800 p-4 text-white text-lg">
-        <ul className="flex flex-wrap gap-4 justify-around">
+        <ul className="flex flex-wrap gap-6 justify-around">
           <li>
             <NavLink to="/" className="hover:underline">Inicio</NavLink >
           </li>
@@ -16,6 +16,9 @@ export default function NavBar () {
           </li>
           <li>
             <NavLink to="/btnLoading" className="hover:underline">Botón loading</NavLink >
+          </li>
+          <li>
+            <NavLink to="/progress" className="hover:underline">Progreso entre formularios</NavLink >
           </li>
           <li>
             <NavLink to="/error404" className="hover:underline">Error 404</NavLink >

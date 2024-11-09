@@ -8,6 +8,7 @@ import Formulario from "./components/Formulario/Formulario";
 import AutoCompletar from "./components/BtnAutoCompletar/AutoCompletar";
 import Loading from "./components/BtnLoading/FormLoading";
 import Page404 from "./components/Page404/Page404";
+import Progressindex from "./components/ProgressForm/ProgressIndex";
 
 export default function App() {
   return (
@@ -21,6 +22,8 @@ export default function App() {
         <Route path="/btnAutoCompletar" element={<AutoCompletar />} />
 
         <Route path="/btnLoading" element={<Loading />} />
+
+        <Route path="/progress" element={<Progressindex />} />
 
         <Route path="/error404" element={<Page404 />} />
 
