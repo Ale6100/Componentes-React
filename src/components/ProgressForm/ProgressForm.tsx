@@ -44,7 +44,7 @@ export default function ProgressForm({ formList, formActual, className }: Progre
         return (
           <li key={item.id} className='flex items-center' >
             <div className="flex flex-col items-center justify-center">
-              <span className={`flex items-center justify-center w-6 h-6 rounded-full shrink-0 ${isCompleted && !isCurrent ? 'bg-primary bg-green-700 text-primary-foreground' : isCurrent ? 'bg-primary/20 text-primary border border-black' : 'bg-muted' }`} >
+              <span className={`flex items-center justify-center w-6 h-6 rounded-full shrink-0 ${isCompleted && !isCurrent ? 'bg-green-700 text-primary-foreground' : isCurrent ? 'bg-primary/20 text-primary border border-black' : 'bg-muted' }`} >
                 {isCurrent ? (
                   <User className="w-4 h-4" />
                 ) : isCompleted ? (
