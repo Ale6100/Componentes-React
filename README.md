@@ -2,6 +2,8 @@
 
 Bienvenido! En este proyecto pienso dejar componentes interesantes de React. Propósito similar a [este proyecto](https://github.com/Ale6100/codigos-utiles-ap.git)
 
+Puedes ver un ejemplo de uso de cada uno [aquí](https://miscomponentes.netlify.app/)
+
 ## Componentes
 
 * [DataTable.tsx](/src/components/tabla/DataTable.tsx) | Componente capaz de renderizar una tabla con muchas funcionalidades incorporadas por defecto
