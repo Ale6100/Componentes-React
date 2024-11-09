@@ -15,7 +15,10 @@ export default function NavBar () {
             <NavLink to="/formulario" className="hover:underline">Formulario</NavLink >
           </li>
           <li>
-            <NavLink to="/btnAutoCompletar" className="hover:underline">Botón de autocompletado</NavLink >
+            <NavLink to="/btnAutocompletar" className="hover:underline">Botón de autocompletado</NavLink >
+          </li>
+          <li>
+            <NavLink to="/btnPending" className="hover:underline">Botón pendiente</NavLink >
           </li>
           <li>
             <NavLink to="/error404" className="hover:underline">404</NavLink >

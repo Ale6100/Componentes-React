@@ -10,6 +10,7 @@ Puedes ver un ejemplo de uso de cada uno [aquí](https://miscomponentes.netlify.
 * [NotFound.tsx](/src/components/NotFound.tsx) | Simple página de error 404 animada
 * [FormComponent.tsx](/src/components/Formulario/FormComponent.tsx) | Formulario con validaciones e inputs interesantes
 * [BtnAutcompletar.tsx](/src/components/BtnAutoCompletar/BtnAutocompletar.tsx) | Botón que autocompleta un formulario con campos válidos
+* [BtnPending.tsx](/src/components/BtnPending/BtnPending.tsx) | Botón que muestra un spinner y un mensaje mientras se ejecuta una promesa
 
 ## Construido con 🛠️
 

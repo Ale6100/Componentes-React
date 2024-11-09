@@ -6,6 +6,7 @@ import { Toaster } from "@/components/ui/sonner";
 import NotFound from "./components/NotFound";
 import Formulario from "./components/Formulario/Formulario";
 import AutoCompletar from "./components/BtnAutoCompletar/AutoCompletar";
+import Pending from "./components/BtnPending/Pending";
 
 export default function App() {
   return (
@@ -19,6 +20,8 @@ export default function App() {
         <Route path="/formulario" element={<Formulario />} />
 
         <Route path="/btnAutoCompletar" element={<AutoCompletar />} />
+
+        <Route path="/btnPending" element={<Pending />} />
 
         <Route path="*" element={<NotFound />} />
       </Routes>

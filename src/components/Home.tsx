@@ -1,6 +1,6 @@
 export default function Home() {
   return (
-    <section className="my-4 w-full mx-auto flex flex-col gap-4 px-1">
+    <section className="max-w-5xl w-full mx-auto my-4 flex flex-col gap-4 px-1">
       <h1 className="text-3xl font-bold text-center">Inicio</h1>
 
       <p>Por favor elige un componente de arriba para visualizar</p>

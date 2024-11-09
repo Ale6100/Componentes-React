@@ -30,14 +30,12 @@ const infoLinks: InfoLink[] = [
 
 export default function Formulario() {
   return (
-    <section className="my-4 w-full mx-auto flex flex-col gap-4 px-1">
+    <section className="max-w-5xl w-full mx-auto my-4 flex flex-col gap-4 px-1">
       <h1 className="text-3xl font-bold text-center">Formulario</h1>
 
       <p className="text-center">Un formulario con distintos tipos de inputs y validaciones</p>
 
-      <div className="max-w-5xl w-full mx-auto">
-        <Form />
-      </div>
+      <Form />
 
       <Separator />
 

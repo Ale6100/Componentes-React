@@ -1,30 +1,30 @@
 import type { InfoLink } from "@/type";
 import InfoLinks from "../InfoLinks";
 import { Separator } from "../ui/separator";
-import FormularioEjemplo from "./FormularioEjemplo";
 import { CheckCircle } from "lucide-react";
+import BtnPending from "./BtnPending";
 
 const infoLinks: InfoLink[] = [
   {
-    name: "zod-fixture",
-    description: "de timdeschryver",
-    url: "https://github.com/timdeschryver/zod-fixture"
+    name: "Sonner",
+    description: "de shadcn",
+    url: "https://ui.shadcn.com/docs/components/sonner"
   },
   {
-    name: 'zod',
-    description: 'de Zod',
-    url: 'https://zod.dev'
+    name: "Sonner",
+    description: "de sonner",
+    url: "https://sonner.emilkowal.ski/"
   },
 ]
 
-export default function AutoCompletar() {
+export default function Pending() {
   return (
-    <section className="max-w-5xl w-full mx-auto my-4 flex flex-col gap-4 px-1">
-      <h1 className="text-3xl font-bold text-center">Botón de autocompletado</h1>
+    <section className="max-w-5xl w-full mx-auto my-4  flex flex-col gap-4 px-1">
+      <h1 className="text-3xl font-bold text-center">Botón Pendiente y Toast Pendiente</h1>
 
-      <p className="text-center">Un botón que completa un formulario con campos válidos y al azar</p>
+      <p className="text-center">Un botón y notificación para que el usuario sepa esperar a que el formulario termine de enviarse</p>
 
-      <FormularioEjemplo />
+      <BtnPending />
 
       <Separator />
 
@@ -45,7 +45,10 @@ export default function AutoCompletar() {
 
         <ul className="space-y-4">
           {[
-            "El botón autocompleta cualquier campo con datos al azar, asegurándose de que pasen las validaciones que uno configure",
+            "El botón para enviar el forulario se deshabilita mientras se envía",
+            "Muestra un toast (un mensaje) que indica que se están enviando los datos",
+            "El mismo toast cambia de color y mensaje al finalizar el envío. El cambio le dirá al usuario si el envío fue exitoso o no",
+            "Se vacían los campos en caso de que el envío haya sido exitoso",
           ].map(item => (
             <li key={item} className="flex items-start">
               <CheckCircle className="h-5 w-5 text-primary mr-2 mt-1 flex-shrink-0" />

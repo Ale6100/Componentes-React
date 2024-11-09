@@ -120,14 +120,12 @@ const infoLinks: InfoLink[] = [
 
 export default function Tabla() {
   return (
-    <section className="my-4 w-full mx-auto flex flex-col gap-4 px-1">
+    <section className="max-w-5xl w-full mx-auto my-4 flex flex-col gap-4 px-1">
       <h1 className="text-3xl font-bold text-center">Tabla</h1>
 
       <p className="text-center">Una tabla de datos interactiva y personalizable que se convierte en una lista de cards en formato mobile</p>
 
-      <div className="max-w-5xl w-full mx-auto">
-        <DataTable columns={columns} data={data} txtPlaceholderFilter="Filtrar por todo menos email" columnsHidden={['pais']} Card={CardData}/>
-      </div>
+      <DataTable columns={columns} data={data} txtPlaceholderFilter="Filtrar por todo menos email" columnsHidden={['pais']} Card={CardData}/>
 
       <Separator />
 
