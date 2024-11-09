@@ -12,6 +12,9 @@ export default function NavBar () {
             <NavLink to="/tabla" className="hover:underline">Tabla</NavLink >
           </li>
           <li>
+            <NavLink to="/formulario" className="hover:underline">Formulario</NavLink >
+          </li>
+          <li>
             <NavLink to="/error404" className="hover:underline">404</NavLink >
           </li>
         </ul>

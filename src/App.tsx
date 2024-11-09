@@ -4,6 +4,7 @@ import NavBar from "./components/NavBar";
 import Tabla from "./components/tabla/Tabla";
 import { Toaster } from "@/components/ui/sonner";
 import NotFound from "./components/NotFound";
+import Formulario from "./components/Formulario/Formulario";
 
 export default function App() {
   return (
@@ -13,6 +14,8 @@ export default function App() {
         <Route path="/" element={<Home />} />
 
         <Route path="/tabla" element={<Tabla />} />
+
+        <Route path="/formulario" element={<Formulario />} />
 
         <Route path="*" element={<NotFound />} />
       </Routes>

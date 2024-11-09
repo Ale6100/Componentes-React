@@ -1,11 +1,12 @@
 # Componentes útiles
 
-Bienvenido! En este proyecto pienso dejar componentes interesantes reutilizables. Propósito similar a [este proyecto](https://github.com/Ale6100/codigos-utiles-ap.git)
+Bienvenido! En este proyecto pienso dejar componentes interesantes de React. Propósito similar a [este proyecto](https://github.com/Ale6100/codigos-utiles-ap.git)
 
 ## Componentes
 
-* DataTable.tsx | Componente capaz de renderizar una tabla con muchas funcionalidades incorporadas por defecto.
-* NotFound.tsx | Simple página de error 404 animada.
+* DataTable.tsx | Componente capaz de renderizar una tabla con muchas funcionalidades incorporadas por defecto
+* NotFound.tsx | Simple página de error 404 animada
+* FormComponent.tsx | Formulario con validaciones e inputs interesantes
 
 ## Construido con 🛠️
 
@@ -15,6 +16,8 @@ Bienvenido! En este proyecto pienso dejar componentes interesantes reutilizables
 * [TypeScript](https://www.typescriptlang.org/)
 * [Vite](https://vite.dev/)
 * [TailwindCSS](https://tailwindcss.com/)
+* [zod](https://zod.dev/)
+* [react-hook-form](https://react-hook-form.com/)
 
 ## Autor ✒️
 

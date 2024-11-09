@@ -1,5 +1,4 @@
-import { CheckCircle, ExternalLink, MoreVertical } from "lucide-react"
-import { Badge } from "@/components/ui/badge"
+import { CheckCircle, MoreVertical } from "lucide-react"
 import { Separator } from "@/components/ui/separator"
 import { ColumnDef } from "@tanstack/react-table";
 import { DataTableColumnHeader } from "./DataTableColumnHeader";
@@ -7,6 +6,8 @@ import { DataTable } from "./DataTable";
 import CardData from "./CardData";
 import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
 import { toast } from "sonner";
+import type { InfoLink } from "@/type";
+import InfoLinks from "../InfoLinks";
 
 export type Data = {
   id: number;
@@ -100,12 +101,6 @@ const data: Data[] = [
   },
 ]
 
-type InfoLink = {
-  name?: string;
-  description: string;
-  url: string;
-}
-
 const infoLinks: InfoLink[] = [
   {
     name: "data-table",
@@ -141,13 +136,7 @@ export default function Tabla() {
 
         <ul className="space-y-3">
           {infoLinks.map(tool => (
-            <li key={tool.url} className="flex items-center space-x-2">
-              {tool.name && <Badge variant="outline">{tool.name}</Badge>}
-              <span className="text-muted-foreground">{tool.description}</span>
-              <a title="Abrir enlace" href={tool.url} target="_blank" rel="noopener noreferrer" className="inline-flex items-center text-primary hover:underline">
-                <ExternalLink className="ml-1 h-4 w-4" />
-              </a>
-            </li>
+            <InfoLinks key={tool.url} tool={tool} />
           ))}
         </ul>
       </div>
