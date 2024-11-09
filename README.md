@@ -23,6 +23,7 @@ Puedes ver un ejemplo de uso de cada uno [aquí](https://miscomponentes.netlify.
 * [zod](https://zod.dev/)
 * [react-hook-form](https://react-hook-form.com/)
 * [zod-fixture](https://github.com/timdeschryver/zod-fixture)
+* [Sonner](https://sonner.emilkowal.ski/getting-started)
 
 ## Autor ✒️
 

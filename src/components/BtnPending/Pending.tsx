@@ -13,7 +13,7 @@ const infoLinks: InfoLink[] = [
   {
     name: "Sonner",
     description: "de sonner",
-    url: "https://sonner.emilkowal.ski/"
+    url: "https://sonner.emilkowal.ski/getting-started"
   },
 ]
 
