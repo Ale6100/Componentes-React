@@ -34,14 +34,14 @@ export default function BtnLoading({ className, btnLoading }: BtnLoadingProps) {
     }
 
     if (btnLoading.state === 'success') {
-      toast.success('Formulario enviado', {
+      toast.success(btnLoading.message, {
         id: toastId,
       });
       return;
     }
 
     if (btnLoading.state === 'error') {
-      toast.error('Error al enviar el formulario', {
+      toast.error(btnLoading.message, {
         id: toastId,
       });
       return;

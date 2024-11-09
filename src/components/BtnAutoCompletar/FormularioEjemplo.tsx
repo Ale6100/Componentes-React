@@ -125,6 +125,7 @@ export default function FormularioEjemplo() {
     await waitFor(segundosRandom * 1000);
     toast.success("Formulario enviado");
     setBtnLoading(false);
+    form.reset();
   }
 
   return (
