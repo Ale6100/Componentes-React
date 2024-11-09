@@ -4,9 +4,10 @@ Bienvenido! En este proyecto pienso dejar componentes interesantes de React. Pro
 
 ## Componentes
 
-* DataTable.tsx | Componente capaz de renderizar una tabla con muchas funcionalidades incorporadas por defecto
-* NotFound.tsx | Simple página de error 404 animada
-* FormComponent.tsx | Formulario con validaciones e inputs interesantes
+* [DataTable.tsx](/src/components/tabla/DataTable.tsx) | Componente capaz de renderizar una tabla con muchas funcionalidades incorporadas por defecto
+* [NotFound.tsx](/src/components/NotFound.tsx) | Simple página de error 404 animada
+* [FormComponent.tsx](/src/components/Formulario/FormComponent.tsx) | Formulario con validaciones e inputs interesantes
+* [BtnAutcompletar.tsx](/src/components/BtnAutoCompletar/BtnAutocompletar.tsx) | Botón que autocompleta un formulario con campos válidos
 
 ## Construido con 🛠️
 
@@ -18,6 +19,7 @@ Bienvenido! En este proyecto pienso dejar componentes interesantes de React. Pro
 * [TailwindCSS](https://tailwindcss.com/)
 * [zod](https://zod.dev/)
 * [react-hook-form](https://react-hook-form.com/)
+* [zod-fixture](https://github.com/timdeschryver/zod-fixture)
 
 ## Autor ✒️
 

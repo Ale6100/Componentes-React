@@ -5,6 +5,7 @@ import Tabla from "./components/tabla/Tabla";
 import { Toaster } from "@/components/ui/sonner";
 import NotFound from "./components/NotFound";
 import Formulario from "./components/Formulario/Formulario";
+import AutoCompletar from "./components/BtnAutoCompletar/AutoCompletar";
 
 export default function App() {
   return (
@@ -16,6 +17,8 @@ export default function App() {
         <Route path="/tabla" element={<Tabla />} />
 
         <Route path="/formulario" element={<Formulario />} />
+
+        <Route path="/btnAutoCompletar" element={<AutoCompletar />} />
 
         <Route path="*" element={<NotFound />} />
       </Routes>

@@ -4,7 +4,7 @@ export default function NavBar () {
   return (
     <header>
       <nav className="bg-gray-800 p-4 text-white text-lg">
-        <ul className="flex gap-4 justify-around">
+        <ul className="flex flex-wrap gap-4 justify-around">
           <li>
             <NavLink to="/" className="hover:underline">Inicio</NavLink >
           </li>
@@ -13,6 +13,9 @@ export default function NavBar () {
           </li>
           <li>
             <NavLink to="/formulario" className="hover:underline">Formulario</NavLink >
+          </li>
+          <li>
+            <NavLink to="/btnAutoCompletar" className="hover:underline">Botón de autocompletado</NavLink >
           </li>
           <li>
             <NavLink to="/error404" className="hover:underline">404</NavLink >
