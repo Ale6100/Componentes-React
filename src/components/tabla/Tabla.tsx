@@ -134,6 +134,24 @@ export default function Tabla() {
 
       <Separator />
 
+      <div className="p-4 border rounded-lg bg-secondary flex flex-col gap-4">
+        <h2 className="text-2xl font-semibold">Uso</h2>
+
+        <p>La versión base del componente se invoca así:</p>
+
+        <pre className="bg-primary p-4 rounded-lg text-sm text-white text-wrap max-md:text-xs">
+          {
+            `<DataTable columns={columns} data={data} />`
+          }
+        </pre>
+
+        <p>Donde ambos atributos contienen información de las columnas y datos</p>
+
+        <a href="https://github.com/Ale6100/Componentes-React/blob/main/src/components/tabla/DataTable.tsx" target="_blank" rel='noopener' className="text-blue-700">Ver código</a>
+      </div>
+
+      <Separator />
+
       <div className="p-4 border rounded-lg bg-secondary">
         <h2 className="text-2xl font-semibold mb-4">Links de utilidad:</h2>
 
@@ -159,7 +177,6 @@ export default function Tabla() {
             "Si se pasa un atributo Card de tipo componente, servirá como componente plantilla donde se renderizarán los datos de cada fila en formato mobile",
             "Es posible ocultar columnas por defecto con el atributo columnsHidden",
             "Es posible cambiar el placeholder del filtro",
-            "Es posible pasar un className para personalizar el contenedor padre",
           ].map(item => (
             <li key={item} className="flex items-start">
               <CheckCircle className="h-5 w-5 text-primary mr-2 mt-1 flex-shrink-0" />

@@ -28,6 +28,24 @@ export default function AutoCompletar() {
 
       <Separator />
 
+      <div className="p-4 border rounded-lg bg-secondary flex flex-col gap-4">
+        <h2 className="text-2xl font-semibold">Uso</h2>
+
+        <p>La versión base del componente se invoca así:</p>
+
+        <pre className="bg-primary p-4 rounded-lg text-sm text-white text-wrap max-md:text-xs">
+          {
+            `<BtnAutocompletar schema={formSchema} onAutofill={handleAutofill} />`
+          }
+        </pre>
+
+        <p>Donde formSchema es el schema de zod, y handleAutoFill es una función cuyo argumento tendrá los datos random generados</p>
+
+        <a href="https://github.com/Ale6100/Componentes-React/blob/main/src/components/BtnAutoCompletar/BtnAutocompletar.tsx" target="_blank" rel='noopener' className="text-blue-700">Ver código</a>
+      </div>
+
+      <Separator />
+
       <div className="p-4 border rounded-lg bg-secondary">
         <h2 className="text-2xl font-semibold mb-4">Links de utilidad:</h2>
 

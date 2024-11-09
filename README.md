@@ -7,10 +7,10 @@ Puedes ver un ejemplo de uso de cada uno [aquí](https://miscomponentes.netlify.
 ## Componentes
 
 * [DataTable.tsx](/src/components/tabla/DataTable.tsx) | Componente capaz de renderizar una tabla con muchas funcionalidades incorporadas por defecto
-* [NotFound.tsx](/src/components/NotFound.tsx) | Simple página de error 404 animada
+* [BtnAutocompletar.tsx](/src/components/BtnAutoCompletar/BtnAutocompletar.tsx) | Botón que autocompleta un formulario con campos válidos
+* [BtnLoading.tsx](/src/components/BtnLoading/BtnLoading.tsx) | Botón que muestra un spinner y un mensaje mientras se ejecuta una promesa
+* [NotFound.tsx](/src/components/BtnLoading/BtnLoading.tsx) | Simple página de error 404 animada
 * [FormComponent.tsx](/src/components/Formulario/FormComponent.tsx) | Formulario con validaciones e inputs interesantes
-* [BtnAutcompletar.tsx](/src/components/BtnAutoCompletar/BtnAutocompletar.tsx) | Botón que autocompleta un formulario con campos válidos
-* [BtnPending.tsx](/src/components/BtnPending/BtnPending.tsx) | Botón que muestra un spinner y un mensaje mientras se ejecuta una promesa
 
 ## Construido con 🛠️
 

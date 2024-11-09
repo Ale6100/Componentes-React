@@ -8,7 +8,7 @@ import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, For
 import { Input } from "../ui/input";
 import { AtSign, CalendarIcon, Loader2 } from "lucide-react";
 import { Button } from "../ui/button";
-import BtnAutocompletarr from "./BtnAutocompletar";
+import BtnAutocompletar from "./BtnAutocompletar";
 import { Switch } from "../ui/switch";
 import { Select, SelectContent, SelectTrigger, SelectValue, SelectItem } from "../ui/select";
 import { Checkbox } from "../ui/checkbox";
@@ -130,7 +130,7 @@ export default function FormularioEjemplo() {
   return (
     <>
       <div className="flex justify-center mb-4">
-        <BtnAutocompletarr className="border border-black" schema={formSchema} onAutofill={handleAutofill} />
+        <BtnAutocompletar className="border border-black" schema={formSchema} onAutofill={handleAutofill} />
       </div>
 
       <Form {...form}>

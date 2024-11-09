@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button"
 import { ArrowBigLeft } from "lucide-react"
 import { Link } from 'react-router-dom'
 
-export default function NotFound() {
+export default function NotFound({ className }: { readonly className?: string }) {
   const [ isVisible, setIsVisible ] = useState(false)
 
   useEffect(() => {
@@ -13,7 +13,7 @@ export default function NotFound() {
   }, [])
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-r animate-gradient-x">
+    <div className={`min-h-screen flex items-center justify-center bg-gradient-to-r animate-gradient-x ${className ?? ''}`}>
       <div className="text-center">
         <h1 className="text-9xl max-md:text-7xl font-extrabold text-black tracking-widest">
           <span className="inline-block animate-bounce">4</span>

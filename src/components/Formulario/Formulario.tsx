@@ -39,6 +39,14 @@ export default function Formulario() {
 
       <Separator />
 
+      <div className="p-4 border rounded-lg bg-secondary flex flex-col gap-4">
+        <h2 className="text-2xl font-semibold">Uso</h2>
+
+        <p>A diferencia de los demás componentes del sitio, este no se invoca en una línea. En su lugar se debe analizar su estructura entera y tomar lo que te interese</p>
+      </div>
+
+      <Separator />
+
       <div className="p-4 border rounded-lg bg-secondary">
         <h2 className="text-2xl font-semibold mb-4">Links de utilidad:</h2>
 

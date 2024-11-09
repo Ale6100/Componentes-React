@@ -3,10 +3,11 @@ import Home from "./components/Home";
 import NavBar from "./components/NavBar";
 import Tabla from "./components/tabla/Tabla";
 import { Toaster } from "@/components/ui/sonner";
-import NotFound from "./components/NotFound";
+import NotFound from "./components/Page404/NotFound";
 import Formulario from "./components/Formulario/Formulario";
 import AutoCompletar from "./components/BtnAutoCompletar/AutoCompletar";
-import Pending from "./components/BtnPending/Pending";
+import Loading from "./components/BtnLoading/FormLoading";
+import Page404 from "./components/Page404/Page404";
 
 export default function App() {
   return (
@@ -17,11 +18,13 @@ export default function App() {
 
         <Route path="/tabla" element={<Tabla />} />
 
-        <Route path="/formulario" element={<Formulario />} />
-
         <Route path="/btnAutoCompletar" element={<AutoCompletar />} />
 
-        <Route path="/btnPending" element={<Pending />} />
+        <Route path="/btnLoading" element={<Loading />} />
+
+        <Route path="/error404" element={<Page404 />} />
+
+        <Route path="/formulario" element={<Formulario />} />
 
         <Route path="*" element={<NotFound />} />
       </Routes>
