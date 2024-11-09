@@ -94,7 +94,7 @@ const data: Data[] = [
   },
   {
     id: 3,
-    nombre: "Pedro",
+    nombre: "Federico",
     apellido: "Martínez",
     email: "pp@photmail.com",
     pais: "Perú",
@@ -115,6 +115,11 @@ const infoLinks: InfoLink[] = [
   {
     description: "El principio de este video, para hacer un filtro global",
     url: 'https://youtu.be/ZG2_vPlQA8Q?si=qbtlQC4JmmMPiLLR'
+  },
+  {
+    name: '@formkit/auto-animate',
+    description: 'de FormKit',
+    url: 'https://auto-animate.formkit.com/'
   }
 ]
 
@@ -150,6 +155,7 @@ export default function Tabla() {
             "De manera predeterminada habrá un botón para ocultar o esconder las columnas que uno desee",
             "De manera predeterminada habrá un filtro y funcionará para todos los campos. Se puede deshabilitar para campos específicos con la propiedad enableGlobalFilter",
             "Se puede activar un botón en cada columna para ordenar las filas en su orden ascendente o descendente. También en ese mismo botón se puede ocultar la columna. Se activa con el componente DataTableColumnHeader",
+            "De manera predeterminada la reordenación de columnas incluye animaciones para mejorar la experiencia visual.",
             "Si se pasa un atributo Card de tipo componente, servirá como componente plantilla donde se renderizarán los datos de cada fila en formato mobile",
             "Es posible ocultar columnas por defecto con el atributo columnsHidden",
             "Es posible cambiar el placeholder del filtro",
