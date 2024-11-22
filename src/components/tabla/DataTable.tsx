@@ -8,7 +8,8 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { useAutoAnimate } from '@formkit/auto-animate/react'
 import { useMediaQuery } from "react-responsive"
-import { Search } from "lucide-react";
+import { LoaderCircle, Search } from "lucide-react";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -17,7 +18,18 @@ interface DataTableProps<TData, TValue> {
   Card?: ComponentType<{ data: TData, row: Row<TData> }>;
   txtPlaceholderFilter?: string;
   columnsHidden?: Array<Extract<keyof TData, string>>;
+  dataLoading?: boolean;
 }
+
+const TableSkeleton = () => (
+  <div className="space-y-4">
+    <Skeleton className="h-10 w-full" />
+    <Skeleton className="h-10 w-full" />
+    <Skeleton className="h-10 w-full" />
+    <Skeleton className="h-10 w-full" />
+    <Skeleton className="h-10 w-full" />
+  </div>
+)
 
 /**
  * Componente de tabla de datos configurable para visualizar y manipular grandes volúmenes de datos.
@@ -33,14 +45,16 @@ interface DataTableProps<TData, TValue> {
  * @param {React.ComponentType<{ data: TData, row: Row<TData> }>} [props.Card] - Componente de tarjeta opcional que, si se proporciona, reemplaza la visualización de formato de tabla por una lista de componentes `Card` en dispositivos móviles.
  * @param {string} [props.txtPlaceholderFilter="Filtrar..."] - Texto del placeholder para el input de filtro global.
  * @param {Array<Extract<keyof TData, string>>} [props.columnsHidden=[]] - Columnas inicialmente ocultas.
+ * @param {boolean} [props.dataLoading=false] - Indica si los datos se están cargando.
  *
  * @returns {JSX.Element} - Componente de tabla interactivo.
  */
-export function DataTable<TData, TValue>({ className, columns, data, Card, txtPlaceholderFilter = "Filtrar...", columnsHidden = []}: Readonly<DataTableProps<TData, TValue>>): JSX.Element {
+export function DataTable<TData, TValue>({ className, columns, data, Card, txtPlaceholderFilter = "Filtrar...", columnsHidden = [], dataLoading = false}: Readonly<DataTableProps<TData, TValue>>): JSX.Element {
   const [ sorting, setSorting ] = useState<SortingState>([])
   const [ columnVisibility, setColumnVisibility ] = useState<VisibilityState>(columnsHidden.reduce((acc, column) => ({ ...acc, [column]: false }), {}))
   const [ filtering, setFiltering ] = useState<string>("")
   const isDesktop = useMediaQuery({ query: '(min-width: 1024px)' })
+  const [ inputIsLoading, setInputIsLoading ] = useState(false);
 
   const [ parent ] = useAutoAnimate()
 
@@ -80,100 +94,119 @@ export function DataTable<TData, TValue>({ className, columns, data, Card, txtPl
     }
   };
 
-  return (
-    <section className={className ?? ""}>
-      <div className="flex flex-col gap-4">
-        <div className="flex gap-4">
-            <div className="relative w-full">
-              <div className="pointer-events-none absolute inset-y-0 start-0 flex items-center justify-center ps-3 text-muted-foreground/80 peer-disabled:opacity-50">
-                <Search size={16} strokeWidth={2} />
-              </div>
-              <Input id="input-26" className="peer ps-9" placeholder={txtPlaceholderFilter} type="search" value={filtering} onChange={e => setFiltering(e.target.value)} />
-            </div>
+  const handleInputFilter = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setInputIsLoading(true);
+    setFiltering(e.target.value);
 
-            <DropdownMenu>
-                  <DropdownMenuTrigger asChild>
-                    <Button variant="outline" className="ml-auto">
-                      Ver más columnas
-                    </Button>
-                  </DropdownMenuTrigger>
-                  <DropdownMenuContent align="end">
-                    {table
-                      .getAllColumns()
-                      .filter(
-                        (column) => column.getCanHide()
-                      )
-                      .map(column => {
-                        return (
-                          <DropdownMenuCheckboxItem
-                            key={column.id}
-                            className="capitalize cursor-pointer"
-                            checked={column.getIsVisible()}
-                            onCheckedChange={value =>
-                              column.toggleVisibility(!!value)
-                            }
-                          >
-                            {VisualizarFiltros(column)}
-                          </DropdownMenuCheckboxItem>
-                        )
-                      })}
-                  </DropdownMenuContent>
-                </DropdownMenu>
+    setTimeout(() => {
+      setInputIsLoading(false);
+    }, 500);
+  }
+
+  return (
+    <div className={`flex flex-col gap-4 ${className ?? ""}`}>
+      <div className="flex gap-4 max-[360px]:flex-col-reverse">
+        <div className="relative w-full">
+          <div className="pointer-events-none absolute inset-y-0 start-0 flex items-center justify-center ps-3 text-muted-foreground/80 peer-disabled:opacity-50">
+            {
+              inputIsLoading ?
+                <LoaderCircle className="animate-spin" size={16} strokeWidth={2} aria-hidden="true" role="presentation" />
+                :
+                <Search size={16} strokeWidth={2} />
+            }
+          </div>
+          <Input id="input-26" className="peer ps-9" placeholder={txtPlaceholderFilter} type="search" value={filtering} onChange={handleInputFilter} title="Filtrar resultados" />
         </div>
-          {
-            Card == null || isDesktop ?
-            <Table className="rounded-md border">
-              <TableHeader>
-                {table.getHeaderGroups().map((headerGroup) => (
-                  <TableRow key={headerGroup.id}>
-                    {headerGroup.headers.map((header) => {
-                      return (
-                        <TableHead key={header.id}>
-                          {header.isPlaceholder
-                            ? null
-                            : flexRender(
-                                header.column.columnDef.header,
-                                header.getContext()
-                              )}
-                        </TableHead>
-                      )
-                    })}
-                  </TableRow>
-                ))}
-              </TableHeader>
-              <TableBody ref={parent}>
-                {table.getRowModel().rows?.length ? (
-                  table.getRowModel().rows.map((row) => (
-                    <TableRow
-                      key={row.id}
-                      data-state={row.getIsSelected() && "selected"}
-                    >
-                      {row.getVisibleCells().map((cell) => (
-                        <TableCell key={cell.id}>
-                          {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                        </TableCell>
-                      ))}
-                    </TableRow>
-                  ))
-                ) : (
-                  <TableRow>
-                    <TableCell colSpan={columns.length} className="h-24 text-center">
-                      Sin resultados
-                    </TableCell>
-                  </TableRow>
-                )}
-              </TableBody>
-            </Table>
-            :
-            <div ref={parent} className="flex flex-col gap-4">
-              {
-                table.getRowModel().rows.map((row, i) => (
-                  <Card key={crypto.randomUUID()} data={data[i]} row={row} />
-                ))
-              }
-            </div>
-          }
+
+        <DropdownMenu>
+          <DropdownMenuTrigger asChild>
+          <Button variant="outline" className="ml-auto max-[360px]:w-full" title="Mostrar u ocultar columnas">
+            Ver más columnas
+          </Button>
+          </DropdownMenuTrigger>
+          <DropdownMenuContent align="end">
+            {table
+              .getAllColumns()
+              .filter(
+                column => column.getCanHide()
+              )
+              .map(column => {
+                return (
+                  <DropdownMenuCheckboxItem
+                    key={column.id}
+                    className="capitalize cursor-pointer"
+                    checked={column.getIsVisible()}
+                    onCheckedChange={value =>
+                      column.toggleVisibility(Boolean(value))
+                    }
+                  >
+                    {VisualizarFiltros(column)}
+                  </DropdownMenuCheckboxItem>
+                )
+              })}
+          </DropdownMenuContent>
+        </DropdownMenu>
       </div>
-    </section>
+        {
+          Card == null || isDesktop ?
+          <Table className="rounded-md border">
+            <TableHeader>
+              {table.getHeaderGroups().map((headerGroup) => (
+                <TableRow key={headerGroup.id}>
+                  {headerGroup.headers.map((header) => {
+                    return (
+                      <TableHead key={header.id}>
+                        {header.isPlaceholder
+                          ? null
+                          : flexRender(
+                              header.column.columnDef.header,
+                              header.getContext()
+                            )}
+                      </TableHead>
+                    )
+                  })}
+                </TableRow>
+              ))}
+            </TableHeader>
+            <TableBody ref={parent}>
+              { dataLoading ? (
+                <TableRow>
+                  <TableCell colSpan={columns.length} className="h-24 text-center">
+                    <TableSkeleton />
+                  </TableCell>
+                </TableRow>
+              ) :
+              table.getRowModel().rows?.length ? (
+                table.getRowModel().rows.map((row) => (
+                  <TableRow
+                    key={row.id}
+                    data-state={row.getIsSelected() && "selected"}
+                  >
+                    {row.getVisibleCells().map((cell) => (
+                      <TableCell key={cell.id}>
+                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                ))
+              ) : (
+                <TableRow>
+                  <TableCell colSpan={columns.length} className="h-24 text-center">
+                    Sin resultados
+                  </TableCell>
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
+          :
+          <div ref={parent} className="flex flex-col gap-4">
+            { dataLoading ? <TableSkeleton /> :
+              table.getRowModel().rows.map((row, i) => (
+                <Card key={row.id} data={data[i]} row={row} />
+              ))
+            }
+          </div>
+        }
+    </div>
   )
 }

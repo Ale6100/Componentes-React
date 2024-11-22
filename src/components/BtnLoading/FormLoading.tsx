@@ -130,6 +130,7 @@ export default function FormLoading() {
             "El botón para enviar el forulario se deshabilita mientras se envía",
             "Muestra un toast (un mensaje) que indica que se están enviando los datos",
             "El mismo toast cambia de color y mensaje al finalizar el envío. El cambio le dirá al usuario si el envío fue exitoso o no",
+            "Es posible personalizar los textos del botón y de su estado deshabilitado",
           ].map(item => (
             <li key={item} className="flex items-start">
               <CheckCircle className="h-5 w-5 text-primary mr-2 mt-1 flex-shrink-0" />

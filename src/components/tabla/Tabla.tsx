@@ -8,6 +8,7 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem,
 import { toast } from "sonner";
 import type { InfoLink } from "@/type";
 import InfoLinks from "../InfoLinks";
+import { Card } from "../ui/card";
 
 export type Data = {
   id: number;
@@ -130,7 +131,9 @@ export default function Tabla() {
 
       <p className="text-center">Una tabla de datos interactiva y personalizable que se convierte en una lista de cards en formato mobile</p>
 
-      <DataTable columns={columns} data={data} txtPlaceholderFilter="Filtrar por todo menos email" columnsHidden={['pais']} Card={CardData}/>
+      <Card className='p-4 bg-white rounded-xl shadow-md'>
+        <DataTable columns={columns} data={data} txtPlaceholderFilter="Filtrar por todo menos email" columnsHidden={['pais']} Card={CardData}/>
+      </Card>
 
       <Separator />
 
@@ -171,10 +174,11 @@ export default function Tabla() {
           {[
             "Funcionará para cualquier tipo de configuración de columnas que se desee",
             "De manera predeterminada habrá un botón para ocultar o esconder las columnas que uno desee",
-            "De manera predeterminada habrá un filtro y funcionará para todos los campos. Se puede deshabilitar para campos específicos con la propiedad enableGlobalFilter",
+            "De manera predeterminada habrá un filtro con un ícono animado que funcionará para filtrar todos los campos. Se puede deshabilitar para campos específicos con la propiedad enableGlobalFilter",
             "Se puede activar un botón en cada columna para ordenar las filas en su orden ascendente o descendente. También en ese mismo botón se puede ocultar la columna. Se activa con el componente DataTableColumnHeader",
             "De manera predeterminada la reordenación de columnas incluye animaciones para mejorar la experiencia visual.",
             "Si se pasa un atributo Card de tipo componente, servirá como componente plantilla donde se renderizarán los datos de cada fila en formato mobile",
+            "Es posible agregar un skeleton de carga de datos si se pasa un atributo que indique que los datos se están cargando",
             "Es posible ocultar columnas por defecto con el atributo columnsHidden",
             "Es posible cambiar el placeholder del filtro",
           ].map(item => (

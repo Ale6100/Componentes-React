@@ -1,4 +1,4 @@
-import { Check, User, FileQuestionIcon } from 'lucide-react'
+import { Check, Circle } from 'lucide-react'
 
 /**
  * Representa un formulario en la lista de formularios.
@@ -44,14 +44,10 @@ export default function ProgressForm({ formList, formActual, className }: Progre
         return (
           <li key={item.id} className='flex items-center' >
             <div className="flex flex-col items-center justify-center">
-              <span className={`flex items-center justify-center w-6 h-6 rounded-full shrink-0 ${isCompleted && !isCurrent ? 'bg-green-700 text-primary-foreground' : isCurrent ? 'bg-primary/20 text-primary border border-black' : 'bg-muted' }`} >
-                {isCurrent ? (
-                  <User className="w-4 h-4" />
-                ) : isCompleted ? (
-                  <Check className="w-4 h-4" />
-                ) : (
-                  <FileQuestionIcon className="w-4 h-4" />
-                )}
+              <span className={`flex items-center justify-center w-6 h-6 rounded-full shrink-0 ${isCompleted ? 'text-primary-foreground' : isCurrent ? 'text-primary' : '' }`} >
+                {isCompleted ? (
+                  <Check className="w-8 h-8 text-green-500"/>
+                ) : <Circle className="w-8 h-8 text-blue-500"/>}
               </span>
               <span className={`mt-2 text-sm max-md:text-xs font-medium text-center ${isCurrent ? 'text-black font-extrabold' : 'text-gray-700 font-normal'}`}>
                 {item.label}

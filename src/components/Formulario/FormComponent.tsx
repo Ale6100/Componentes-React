@@ -94,7 +94,7 @@ export default function FormComponent() {
           name="mail"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Correo electrónico</FormLabel>
+              <FormLabel onClick={() => form.setFocus('mail')}>Correo electrónico</FormLabel>
               <FormControl>
                 <div className="relative">
                   <Input className="peer ps-9" placeholder="pablo@gmail.com" type="email" {...field} />
@@ -116,7 +116,7 @@ export default function FormComponent() {
           name="country"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Nacionalidad</FormLabel>
+              <FormLabel onClick={() => form.setFocus('country')}>Nacionalidad</FormLabel>
               <FormControl>
                 <div className="relative">
                   <Input className="pe-9" placeholder="Argentina" type="text" {...field}/>
@@ -141,7 +141,7 @@ export default function FormComponent() {
           name="work"
           render={({ field }) => (
             <FormItem>
-              <FormLabel>Ocupación actual</FormLabel>
+              <FormLabel onClick={() => form.setFocus('work')}>Ocupación actual</FormLabel>
               <FormControl>
                 <div className="relative">
                   <div className="pointer-events-none absolute inset-y-0 start-0 flex items-center justify-center ps-3 text-muted-foreground/80 peer-disabled:opacity-50">
