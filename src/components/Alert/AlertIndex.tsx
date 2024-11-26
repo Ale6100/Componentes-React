@@ -47,7 +47,7 @@ const AlertIndex = () => {
           }
         </pre>
 
-        <a href="https://github.com/Ale6100/Componentes-React/blob/main/src/components/Alert/AlertIndex.tsx" target="_blank" rel='noopener' className="text-blue-700">Ver código</a>
+        <a href="https://github.com/Ale6100/Componentes-React/blob/main/src/components/Alert/AlertAction.tsx" target="_blank" rel='noopener' className="text-blue-700">Ver código</a>
       </div>
 
       <Separator />
