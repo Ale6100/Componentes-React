@@ -1,22 +1,16 @@
-import { CheckCircle, MoreVertical } from "lucide-react"
-import { Separator } from "@/components/ui/separator"
-import { ColumnDef } from "@tanstack/react-table";
-import { DataTableColumnHeader } from "./DataTableColumnHeader";
-import { DataTable } from "./DataTable";
-import CardData from "./CardData";
-import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
-import { toast } from "sonner";
-import type { InfoLink } from "@/type";
-import InfoLinks from "../InfoLinks";
+import { Button } from "../ui/button";
 import { Card } from "../ui/card";
-
-export type Data = {
-  id: number;
-  nombre: string;
-  apellido: string;
-  email: `${string}@${string}.${string}`;
-  pais: string;
-}
+import { CheckCircle, Settings2 } from "lucide-react"
+import { ColumnDef } from "@tanstack/react-table";
+import { Data, datos } from "./data";
+import { DataTable } from "./DataTable";
+import { DataTableColumnHeader } from "./DataTableColumnHeader";
+import { DropdownMenu, DropdownMenuContent, DropdownMenuGroup, DropdownMenuItem, DropdownMenuLabel, DropdownMenuSeparator, DropdownMenuTrigger } from "@/components/ui/dropdown-menu";
+import { Separator } from "@/components/ui/separator"
+import { toast } from "sonner";
+import CardData from "./CardData";
+import InfoLinks from "../InfoLinks";
+import type { InfoLink } from "@/type";
 
 const columns: ColumnDef<Data>[] = [
   {
@@ -56,12 +50,12 @@ const columns: ColumnDef<Data>[] = [
       return (
         <DropdownMenu>
           <div className='w-full flex justify-center'>
-          <DropdownMenuTrigger asChild>
-            <button className="p-2 rounded-full hover:bg-gray-200 transition-colors">
-              <MoreVertical className="w-5 h-5" />
-              <span className="sr-only">Abrir menú de acciones</span>
-            </button>
-          </DropdownMenuTrigger>
+            <DropdownMenuTrigger asChild>
+              <Button title='Menú de acciones' variant="ghost" size="sm" className="h-8 w-8 p-0 hover:bg-primary hover:text-primary-foreground focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-offset-0">
+                <span className="sr-only">Abrir menú de acciones</span>
+                <Settings2 className="h-4 w-4 transition-transform duration-200 ease-in-out group-hover:rotate-90" />
+              </Button>
+            </DropdownMenuTrigger>
           </div>
 
           <DropdownMenuContent>
@@ -78,29 +72,7 @@ const columns: ColumnDef<Data>[] = [
   }
 ]
 
-const data: Data[] = [
-  {
-    id: 1,
-    nombre: "Juan",
-    apellido: "Pérez",
-    email: "JuanPerez@gmail.com",
-    pais: "Argentina",
-  },
-  {
-    id: 2,
-    nombre: "María",
-    apellido: "Gómez",
-    email: "Maria@outlook.com",
-    pais: "Brasil",
-  },
-  {
-    id: 3,
-    nombre: "Federico",
-    apellido: "Martínez",
-    email: "pp@photmail.com",
-    pais: "Perú",
-  },
-]
+const data = datos;
 
 const infoLinks: InfoLink[] = [
   {
@@ -132,7 +104,7 @@ export default function Tabla() {
       <p className="text-center">Una tabla de datos interactiva y personalizable que se convierte en una lista de cards en formato mobile</p>
 
       <Card className='p-4 bg-white rounded-xl shadow-md'>
-        <DataTable columns={columns} data={data} txtPlaceholderFilter="Filtrar por todo menos email" columnsHidden={['pais']} Card={CardData}/>
+        <DataTable columns={columns} data={data} txtPlaceholderFilter="Filtrar por todo menos email" columnsHidden={['pais']} Card={CardData} />
       </Card>
 
       <Separator />
@@ -175,6 +147,8 @@ export default function Tabla() {
             "Funcionará para cualquier tipo de configuración de columnas que se desee",
             "De manera predeterminada habrá un botón para ocultar o esconder las columnas que uno desee",
             "De manera predeterminada habrá un filtro con un ícono animado que funcionará para filtrar todos los campos. Se puede deshabilitar para campos específicos con la propiedad enableGlobalFilter",
+            "De manera predeterminada habrá un paginado con un límite personalizado de 10 filas por página",
+            "Se puede modificar la cantidad de cantidad de números de páginas que se muestran en el paginado",
             "Se puede activar un botón en cada columna para ordenar las filas en su orden ascendente o descendente. También en ese mismo botón se puede ocultar la columna. Se activa con el componente DataTableColumnHeader",
             "De manera predeterminada la reordenación de columnas incluye animaciones para mejorar la experiencia visual.",
             "Si se pasa un atributo Card de tipo componente, servirá como componente plantilla donde se renderizarán los datos de cada fila en formato mobile",

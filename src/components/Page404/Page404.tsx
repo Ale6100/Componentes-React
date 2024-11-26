@@ -1,5 +1,5 @@
-import NotFound from "./NotFound";
 import { Separator } from "../ui/separator";
+import NotFound from "./NotFound";
 
 export default function Page404() {
   return (
@@ -25,8 +25,6 @@ export default function Page404() {
 
         <a href="https://github.com/Ale6100/Componentes-React/blob/main/src/components/Page404/NotFound.tsx" target="_blank" rel='noopener' className="text-blue-700">Ver código</a>
       </div>
-
-      <Separator />
     </section>
   );
 }

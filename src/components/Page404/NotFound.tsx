@@ -1,9 +1,7 @@
-'use client'
-
-import { useState, useEffect } from 'react'
-import { Button } from "@/components/ui/button"
 import { ArrowBigLeft } from "lucide-react"
+import { Button } from "@/components/ui/button"
 import { Link } from 'react-router-dom'
+import { useState, useEffect } from 'react'
 
 export default function NotFound({ className }: { readonly className?: string }) {
   const [ isVisible, setIsVisible ] = useState(false)

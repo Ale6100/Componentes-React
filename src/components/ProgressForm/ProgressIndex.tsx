@@ -1,8 +1,8 @@
-import { CheckCircle } from "lucide-react";
 import { Button } from "../ui/button";
+import { CheckCircle } from "lucide-react";
 import { Separator } from "../ui/separator";
-import ProgressForm from "./ProgressForm";
 import { useState } from "react";
+import ProgressForm from "./ProgressForm";
 
 export default function Progressindex() {
   const [ formActual, setFormActual ] = useState(1)

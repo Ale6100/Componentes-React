@@ -21,6 +21,9 @@ export default function NavBar () {
             <NavLink to="/progress" className="hover:underline">Progreso entre formularios</NavLink >
           </li>
           <li>
+            <NavLink to="/alert" className="hover:underline">Alert</NavLink >
+          </li>
+          <li>
             <NavLink to="/error404" className="hover:underline">Error 404</NavLink >
           </li>
           <li>

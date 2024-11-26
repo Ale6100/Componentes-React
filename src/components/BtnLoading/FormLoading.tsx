@@ -1,16 +1,16 @@
-import type { InfoLink } from "@/type";
-import InfoLinks from "../InfoLinks";
-import { Separator } from "../ui/separator";
-import { CheckCircle } from "lucide-react";
-import BtnLoading, { TypeBtnLoading } from "./BtnLoading";
-import { z } from "zod";
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { waitFor } from "@/utils";
-import { Input } from "../ui/input";
 import { Button } from "../ui/button";
+import { CheckCircle } from "lucide-react";
+import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
+import { Input } from "../ui/input";
+import { Separator } from "../ui/separator";
+import { useForm } from "react-hook-form";
+import { useState } from "react";
+import { waitFor } from "@/utils";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import BtnLoading, { TypeBtnLoading } from "./BtnLoading";
+import InfoLinks from "../InfoLinks";
+import type { InfoLink } from "@/type";
 
 const infoLinks: InfoLink[] = [
   {

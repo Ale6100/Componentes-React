@@ -1,15 +1,13 @@
-"use client"
-
-import { ColumnDef, flexRender, getCoreRowModel, getSortedRowModel, SortingState, useReactTable, VisibilityState, getFilteredRowModel, Column, Row } from "@tanstack/react-table"
-import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
-import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
-import { ComponentType, isValidElement, useState } from "react"
+import { ArrowLeftCircle, ArrowRightCircle, LoaderCircle, MoreHorizontal, Search } from "lucide-react";
 import { Button } from "@/components/ui/button"
+import { ColumnDef, flexRender, getCoreRowModel, getPaginationRowModel, getSortedRowModel, SortingState, useReactTable, VisibilityState, getFilteredRowModel, Column, Row } from "@tanstack/react-table"
+import { ComponentType, isValidElement, useState } from "react"
+import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Input } from "@/components/ui/input"
+import { Skeleton } from "@/components/ui/skeleton";
+import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table"
 import { useAutoAnimate } from '@formkit/auto-animate/react'
 import { useMediaQuery } from "react-responsive"
-import { LoaderCircle, Search } from "lucide-react";
-import { Skeleton } from "@/components/ui/skeleton";
 
 interface DataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -19,6 +17,8 @@ interface DataTableProps<TData, TValue> {
   txtPlaceholderFilter?: string;
   columnsHidden?: Array<Extract<keyof TData, string>>;
   dataLoading?: boolean;
+  pageSize?: number;
+  cantPaginasAlrededor?: `${number}`;
 }
 
 const TableSkeleton = () => (
@@ -46,10 +46,12 @@ const TableSkeleton = () => (
  * @param {string} [props.txtPlaceholderFilter="Filtrar..."] - Texto del placeholder para el input de filtro global.
  * @param {Array<Extract<keyof TData, string>>} [props.columnsHidden=[]] - Columnas inicialmente ocultas.
  * @param {boolean} [props.dataLoading=false] - Indica si los datos se están cargando.
+ * @param {number} [props.pageSize=10] - Número de filas por página.
+ * @param {string} [props.cantPaginasAlrededor='2'] - Cantidad de páginas alrededor de la página actual a mostrar en la paginación.
  *
  * @returns {JSX.Element} - Componente de tabla interactivo.
  */
-export function DataTable<TData, TValue>({ className, columns, data, Card, txtPlaceholderFilter = "Filtrar...", columnsHidden = [], dataLoading = false}: Readonly<DataTableProps<TData, TValue>>): JSX.Element {
+export function DataTable<TData, TValue>({ className, columns, data, Card, txtPlaceholderFilter = "Filtrar...", columnsHidden = [], dataLoading = false, pageSize = 10, cantPaginasAlrededor = '2'}: Readonly<DataTableProps<TData, TValue>>): JSX.Element {
   const [ sorting, setSorting ] = useState<SortingState>([])
   const [ columnVisibility, setColumnVisibility ] = useState<VisibilityState>(columnsHidden.reduce((acc, column) => ({ ...acc, [column]: false }), {}))
   const [ filtering, setFiltering ] = useState<string>("")
@@ -62,6 +64,7 @@ export function DataTable<TData, TValue>({ className, columns, data, Card, txtPl
     data,
     columns,
     getCoreRowModel: getCoreRowModel(),
+    getPaginationRowModel: getPaginationRowModel(),
     onColumnVisibilityChange: setColumnVisibility,
     onSortingChange: setSorting,
     getSortedRowModel: getSortedRowModel(),
@@ -72,6 +75,12 @@ export function DataTable<TData, TValue>({ className, columns, data, Card, txtPl
       globalFilter: filtering,
     },
     onGlobalFilterChange: setFiltering,
+    initialState: {
+      pagination: {
+        pageIndex: 0,
+        pageSize,
+      },
+    },
   })
 
   /**
@@ -102,6 +111,10 @@ export function DataTable<TData, TValue>({ className, columns, data, Card, txtPl
       setInputIsLoading(false);
     }, 500);
   }
+
+  const indexActualPage = table.getState().pagination.pageIndex;
+  const cantidadPaginas = table.getPageCount();
+  const pagAlrededor = parseInt(cantPaginasAlrededor);
 
   return (
     <div className={`flex flex-col gap-4 ${className ?? ""}`}>
@@ -206,6 +219,31 @@ export function DataTable<TData, TValue>({ className, columns, data, Card, txtPl
               ))
             }
           </div>
+        }
+        {
+          cantidadPaginas > 1 && (
+            <div className="flex items-center justify-end gap-2 mt-4">
+              <Button variant="default" size="icon" onClick={() => table.previousPage()} disabled={!table.getCanPreviousPage()}> <ArrowLeftCircle className="h-4 w-4" /> </Button>
+
+              <Button variant="outline" size="sm" onClick={() => table.setPageIndex(0)} disabled={indexActualPage === 0} className={indexActualPage === 0 ? 'bg-primary text-primary-foreground' : ''}>1</Button>
+
+              { indexActualPage > pagAlrededor + 1 && <Button variant="outline" size="icon" disabled> <MoreHorizontal className="h-4 w-4" /> </Button> }
+
+              {Array.from({ length: cantidadPaginas }, (_, i) => {
+                if (i === 0 || i === cantidadPaginas - 1) return null;
+                if (i >= indexActualPage - pagAlrededor && i <= indexActualPage + pagAlrededor) {
+                  return <Button key={i} variant="outline" size="sm" onClick={() => table.setPageIndex(i)}  disabled={indexActualPage === i} className={indexActualPage === i ? 'bg-primary text-primary-foreground' : ''}> {i + 1} </Button>;
+                }
+                return null;
+              })}
+
+              { indexActualPage < cantidadPaginas - pagAlrededor - 2 && <Button variant="outline" size="icon" disabled> <MoreHorizontal className="h-4 w-4" /> </Button> }
+
+              { cantidadPaginas > 1 && <Button variant="outline" size="sm" onClick={() => table.setPageIndex(cantidadPaginas - 1)} disabled={indexActualPage === cantidadPaginas - 1} className={indexActualPage === cantidadPaginas - 1 ? 'bg-primary text-primary-foreground' : ''}> {cantidadPaginas} </Button> }
+
+              <Button variant="outline" size="icon" onClick={() => table.nextPage()} disabled={!table.getCanNextPage()}> <ArrowRightCircle className="h-4 w-4" /> </Button>
+            </div>
+          )
         }
     </div>
   )

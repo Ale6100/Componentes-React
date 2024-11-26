@@ -1,13 +1,13 @@
+import { AtSign, CircleX, Loader2, LoaderCircle, PenLine } from "lucide-react";
+import { Button } from "../ui/button";
+import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
+import { Input } from "../ui/input";
+import { toast } from "sonner";
 import { useEffect, useState } from "react";
 import { useForm, useWatch } from "react-hook-form";
+import { waitFor } from "@/utils";
 import { z } from "zod";
 import { zodResolver } from '@hookform/resolvers/zod';
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form"
-import { toast } from "sonner";
-import { Input } from "../ui/input";
-import { Button } from "../ui/button";
-import { AtSign, CircleX, Loader2, LoaderCircle, PenLine } from "lucide-react";
-import { waitFor } from "@/utils";
 
 const formSchema = z.object({
   username: z.string()

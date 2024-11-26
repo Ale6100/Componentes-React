@@ -1,6 +1,6 @@
-import { Cell, flexRender, Row } from "@tanstack/react-table"
-import type { Data } from "./Tabla"
 import { Card, CardContent } from "@/components/ui/card"
+import { Cell, flexRender, Row } from "@tanstack/react-table"
+import type { Data } from "@/components/tabla/data"
 
 /**
  * Props del componente Card

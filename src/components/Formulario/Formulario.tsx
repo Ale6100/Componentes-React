@@ -1,8 +1,8 @@
+import { CheckCircle } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import Form from "./FormComponent";
 import InfoLinks from "../InfoLinks";
 import type { InfoLink } from "@/type";
-import { CheckCircle } from "lucide-react";
 
 const infoLinks: InfoLink[] = [
   {
@@ -43,6 +43,8 @@ export default function Formulario() {
         <h2 className="text-2xl font-semibold">Uso</h2>
 
         <p>A diferencia de los demás componentes del sitio, este no se invoca en una línea. En su lugar se debe analizar su estructura entera y tomar lo que te interese</p>
+
+        <a href="https://github.com/Ale6100/Componentes-React/blob/main/src/components/Formulario/FormComponent.tsx" target="_blank" rel='noopener' className="text-blue-700">Ver código</a>
       </div>
 
       <Separator />

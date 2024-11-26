@@ -1,14 +1,15 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Home from "./components/Home";
-import NavBar from "./components/NavBar";
-import Tabla from "./components/tabla/Tabla";
 import { Toaster } from "@/components/ui/sonner";
-import NotFound from "./components/Page404/NotFound";
-import Formulario from "./components/Formulario/Formulario";
+import AlertIndex from "./components/Alert/AlertIndex";
 import AutoCompletar from "./components/BtnAutoCompletar/AutoCompletar";
+import Formulario from "./components/Formulario/Formulario";
+import Home from "./components/Home";
 import Loading from "./components/BtnLoading/FormLoading";
+import NavBar from "./components/NavBar";
+import NotFound from "./components/Page404/NotFound";
 import Page404 from "./components/Page404/Page404";
 import Progressindex from "./components/ProgressForm/ProgressIndex";
+import Tabla from "./components/tabla/Tabla";
 
 export default function App() {
   return (
@@ -24,6 +25,8 @@ export default function App() {
         <Route path="/btnLoading" element={<Loading />} />
 
         <Route path="/progress" element={<Progressindex />} />
+
+        <Route path="/alert" element={<AlertIndex />} />
 
         <Route path="/error404" element={<Page404 />} />
 

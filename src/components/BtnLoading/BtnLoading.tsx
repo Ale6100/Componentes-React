@@ -1,7 +1,7 @@
-import { Loader2 } from "lucide-react";
-import { useEffect, useState } from "react";
-import { toast } from "sonner";
 import { Button } from "../ui/button";
+import { Loader2 } from "lucide-react";
+import { toast } from "sonner";
+import { useEffect, useState } from "react";
 
 export type TypeBtnLoading = {
   state: null | 'loading' | 'success' | 'error';

@@ -1,8 +1,8 @@
-import type { InfoLink } from "@/type";
-import InfoLinks from "../InfoLinks";
+import { CheckCircle } from "lucide-react";
 import { Separator } from "../ui/separator";
 import FormularioEjemplo from "./FormularioEjemplo";
-import { CheckCircle } from "lucide-react";
+import InfoLinks from "../InfoLinks";
+import type { InfoLink } from "@/type";
 
 const infoLinks: InfoLink[] = [
   {

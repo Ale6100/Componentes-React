@@ -1,23 +1,23 @@
-import { waitFor } from "@/utils";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
-import { useForm } from "react-hook-form";
-import { toast } from "sonner";
-import { z } from "zod";
-import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
-import { Input } from "../ui/input";
 import { AtSign, CalendarIcon, Loader2 } from "lucide-react";
 import { Button } from "../ui/button";
-import BtnAutocompletar from "./BtnAutocompletar";
-import { Switch } from "../ui/switch";
-import { Select, SelectContent, SelectTrigger, SelectValue, SelectItem } from "../ui/select";
-import { Checkbox } from "../ui/checkbox";
-import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
-import { cn } from "@/lib/utils";
-import { format } from "date-fns";
-import { es } from "date-fns/locale";
 import { Calendar } from "../ui/calendar";
+import { Checkbox } from "../ui/checkbox";
+import { cn } from "@/lib/utils";
+import { es } from "date-fns/locale";
+import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from "../ui/form";
+import { format } from "date-fns";
+import { Input } from "../ui/input";
+import { Popover, PopoverContent, PopoverTrigger } from "../ui/popover";
 import { RadioGroup, RadioGroupItem } from "../ui/radio-group";
+import { Select, SelectContent, SelectTrigger, SelectValue, SelectItem } from "../ui/select";
+import { Switch } from "../ui/switch";
+import { toast } from "sonner";
+import { useForm } from "react-hook-form";
+import { useState } from "react";
+import { waitFor } from "@/utils";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+import BtnAutocompletar from "./BtnAutocompletar";
 
 const Genero = {
   m: 'Masculino',
