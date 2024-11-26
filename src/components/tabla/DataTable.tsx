@@ -223,7 +223,7 @@ export function DataTable<TData, TValue>({ className, columns, data, Card, txtPl
         {
           cantidadPaginas > 1 && (
             <div className="flex items-center justify-end gap-2 mt-4">
-              <Button variant="default" size="icon" onClick={() => table.previousPage()} disabled={!table.getCanPreviousPage()}> <ArrowLeftCircle className="h-4 w-4" /> </Button>
+              <Button variant="outline" size="icon" onClick={() => table.previousPage()} disabled={!table.getCanPreviousPage()}> <ArrowLeftCircle className="h-4 w-4" /> </Button>
 
               <Button variant="outline" size="sm" onClick={() => table.setPageIndex(0)} disabled={indexActualPage === 0} className={indexActualPage === 0 ? 'bg-primary text-primary-foreground' : ''}>1</Button>
 
