@@ -10,19 +10,22 @@ import { toast } from "sonner";
 import { Loader2 } from "lucide-react";
 import { Switch } from "../ui/switch";
 
-const formSchema = z.discriminatedUnion('alquila', [
-  z.object({
-    alquila: z.literal(true),
-    montoAlquila: z.string().refine(val => /^[1-9]\d{0,6}$/.test(val), { message: "El monto debe ser un número entero en un rango válido" }),
-    incluyeExpensasAlquila: z.boolean(),
-  }),
-  z.object({
-    alquila: z.literal(false),
-    estaHabitadaNoAlquila: z.boolean(),
-    razonNoAlquila: z.string().min(1, { message: "La razón por la que no alquila es requerida" }),
-  }),
-]);
-
+const formSchema = z.object({
+  username: z.string().min(1, { message: "El nombre de usuario es requerido" }),
+}).and(
+  z.discriminatedUnion('alquila', [
+    z.object({
+      alquila: z.literal(true),
+      montoAlquila: z.string().refine(val => /^[1-9]\d{0,6}$/.test(val), { message: "El monto debe ser un número entero en un rango válido" }),
+      incluyeExpensasAlquila: z.boolean(),
+    }),
+    z.object({
+      alquila: z.literal(false),
+      estaHabitadaNoAlquila: z.boolean(),
+      razonNoAlquila: z.string().min(1, { message: "La razón por la que no alquila es requerida" }),
+    }),
+  ])
+);
 
 type FormSchema = z.infer<typeof formSchema>;
 
@@ -33,8 +36,8 @@ const FormCondicional = () => {
   const form = useForm<FormSchema>({
     resolver: zodResolver(formSchema),
     defaultValues: defaultAlquila
-      ? { alquila: defaultAlquila, montoAlquila: "", incluyeExpensasAlquila: true }
-      : { alquila: defaultAlquila, estaHabitadaNoAlquila: false, razonNoAlquila: "" },
+      ? { username: '', alquila: defaultAlquila, montoAlquila: "", incluyeExpensasAlquila: true }
+      : { username: '', alquila: defaultAlquila, estaHabitadaNoAlquila: false, razonNoAlquila: "" },
   });
 
   const alquila = useWatch({
@@ -65,6 +68,20 @@ const FormCondicional = () => {
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(handleSubmit, e => console.log('error', e))} className="p-10 flex flex-col gap-6 border rounded">
+        <FormField
+          control={form.control}
+          name="username"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel>Nombre de usuario</FormLabel>
+              <FormControl>
+                <Input {...field} />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+
         <FormField
           control={form.control}
           name="alquila"
