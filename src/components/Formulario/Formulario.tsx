@@ -3,6 +3,7 @@ import { Separator } from "@/components/ui/separator";
 import Form from "./FormComponent";
 import InfoLinks from "../InfoLinks";
 import type { InfoLink } from "@/type";
+import FormCondicional from "./FormCondicional";
 
 const infoLinks: InfoLink[] = [
   {
@@ -33,7 +34,11 @@ export default function Formulario() {
     <section className="max-w-5xl w-full mx-auto my-4 flex flex-col gap-4 px-1">
       <h1 className="text-3xl font-bold text-center">Formulario</h1>
 
-      <p className="text-center">Un formulario con distintos tipos de inputs y validaciones</p>
+      <p className="text-center">Dos formularios. Uno con campos condicionales, y otro con distintos tipos de inputs y validaciones</p>
+
+      <FormCondicional />
+
+      <Separator />
 
       <Form />
 
@@ -66,10 +71,11 @@ export default function Formulario() {
 
         <ul className="space-y-4">
           {[
-            "El formulario se renderiza bien estructurado y con etiquetas semánticas adecuadas",
+            "El primer formulario tiene campos condicionales, que se muestran o no dependiendo de la respuesta de un campo anterior",
+            "Los formularios se renderizan bien estructurado y con etiquetas semánticas adecuadas",
             "Aplica los atributos aria correctos a los campos de formulario en función de los estados",
             "Es posible validar los campos que uno desee y manejarlos con un error personalizado con z.object",
-            "En los ejemplos se aprecia la capacidad de agregar labels y descripciones, también botones e íconos con eventos",
+            "En los ejemplos del segundo formulario se aprecia la capacidad de agregar labels y descripciones, también botones e íconos con eventos",
             "Cuenta con un botón que se deshabilita y tiene un spinner mientras se envía el formulario",
           ].map(item => (
             <li key={item} className="flex items-start">
