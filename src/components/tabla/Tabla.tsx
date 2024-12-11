@@ -104,7 +104,7 @@ export default function Tabla() {
       <p className="text-center">Una tabla de datos interactiva y personalizable que se convierte en una lista de cards en formato mobile</p>
 
       <Card className='p-4 bg-white rounded-xl shadow-md'>
-        <DataTable columns={columns} data={data} txtPlaceholderFilter="Filtrar por todo menos email" columnsHidden={['pais']} Card={CardData} />
+        <DataTable columns={columns} data={data} txtPlaceholderFilter="Filtrar por todo menos email" columnsHidden={['pais']} Card={CardData} registrosRemarcados={[25, 29]} />
       </Card>
 
       <Separator />
@@ -150,6 +150,7 @@ export default function Tabla() {
             "De manera predeterminada habrá un paginado con un límite personalizado de 10 filas por página",
             "Se puede modificar la cantidad de cantidad de números de páginas que se muestran en el paginado",
             "Se puede activar un botón en cada columna para ordenar las filas en su orden ascendente o descendente. También en ese mismo botón se puede ocultar la columna. Se activa con el componente DataTableColumnHeader",
+            "Se puede remarcar en rojo los registros que uno desee con el atributo registrosRemarcados",
             "De manera predeterminada la reordenación de columnas incluye animaciones para mejorar la experiencia visual.",
             "Si se pasa un atributo Card de tipo componente, servirá como componente plantilla donde se renderizarán los datos de cada fila en formato mobile",
             "Es posible agregar un skeleton de carga de datos si se pasa un atributo que indique que los datos se están cargando",

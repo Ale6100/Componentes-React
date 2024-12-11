@@ -11,6 +11,7 @@ Puedes ver un ejemplo de uso de cada uno [aquí](https://miscomponentes.netlify.
 * [BtnLoading.tsx](/src/components/BtnLoading/BtnLoading.tsx) | Botón que muestra un spinner y un mensaje mientras se ejecuta una promesa
 * [ProgressForm.tsx](/src/components/ProgressForm/ProgressForm.tsx) | Barra de progreso que se actualiza a medida que un usuario avanza en una lista de formularios
 * [AlertAction.tsx](/src/components/Alert/AlertAction.tsx) | Un alert con botones de acción
+* [ProgressCircle.tsx](/src/components/ProgressCircle/ProgressCircle.tsx) | Un progreso circular
 * [NotFound.tsx](/src/components/BtnLoading/BtnLoading.tsx) | Simple página de error 404 animada
 * [FormComponent.tsx](/src/components/Formulario/FormComponent.tsx) | Formulario con validaciones e inputs interesantes
 

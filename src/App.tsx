@@ -10,6 +10,7 @@ import NotFound from "./components/Page404/NotFound";
 import Page404 from "./components/Page404/Page404";
 import Progressindex from "./components/ProgressForm/ProgressIndex";
 import Tabla from "./components/tabla/Tabla";
+import IndexProgressCircle from "./components/ProgressCircle/IndexProgressCircle";
 
 export default function App() {
   return (
@@ -27,6 +28,8 @@ export default function App() {
         <Route path="/progress" element={<Progressindex />} />
 
         <Route path="/alert" element={<AlertIndex />} />
+
+        <Route path="/progressCircle" element={<IndexProgressCircle />} />
 
         <Route path="/error404" element={<Page404 />} />
 

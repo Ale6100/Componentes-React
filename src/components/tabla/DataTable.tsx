@@ -9,7 +9,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { useAutoAnimate } from '@formkit/auto-animate/react'
 import { useMediaQuery } from "react-responsive"
 
-interface DataTableProps<TData, TValue> {
+interface DataTableProps<TData , TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
   className?: string;
@@ -19,6 +19,7 @@ interface DataTableProps<TData, TValue> {
   dataLoading?: boolean;
   pageSize?: number;
   cantPaginasAlrededor?: `${number}`;
+  registrosRemarcados?: number[];
 }
 
 const TableSkeleton = () => (
@@ -48,10 +49,11 @@ const TableSkeleton = () => (
  * @param {boolean} [props.dataLoading=false] - Indica si los datos se están cargando.
  * @param {number} [props.pageSize=10] - Número de filas por página.
  * @param {string} [props.cantPaginasAlrededor='2'] - Cantidad de páginas alrededor de la página actual a mostrar en la paginación.
+ * @param {number[]} [props.registrosRemarcados=[]] - Lista de IDs de registros que se destacarán en la tabla. Para que esta funcionalidad sea efectiva los datos deben incluir una propiedad id.
  *
  * @returns {JSX.Element} - Componente de tabla interactivo.
  */
-export function DataTable<TData, TValue>({ className, columns, data, Card, txtPlaceholderFilter = "Filtrar...", columnsHidden = [], dataLoading = false, pageSize = 10, cantPaginasAlrededor = '2'}: Readonly<DataTableProps<TData, TValue>>): JSX.Element {
+export function DataTable<TData extends object, TValue>({ className, columns, data, Card, txtPlaceholderFilter = "Filtrar...", columnsHidden = [], dataLoading = false, pageSize = 10, cantPaginasAlrededor = '2', registrosRemarcados = []}: Readonly<DataTableProps<TData, TValue>>): JSX.Element {
   const [ sorting, setSorting ] = useState<SortingState>([])
   const [ columnVisibility, setColumnVisibility ] = useState<VisibilityState>(columnsHidden.reduce((acc, column) => ({ ...acc, [column]: false }), {}))
   const [ filtering, setFiltering ] = useState<string>("")
@@ -194,6 +196,7 @@ export function DataTable<TData, TValue>({ className, columns, data, Card, txtPl
                   <TableRow
                     key={row.id}
                     data-state={row.getIsSelected() && "selected"}
+                    className={registrosRemarcados.some(r => 'id' in row.original && r === row.original.id) ? 'bg-red-300' : ''}
                   >
                     {row.getVisibleCells().map((cell) => (
                       <TableCell key={cell.id}>

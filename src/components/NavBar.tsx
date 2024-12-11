@@ -3,7 +3,7 @@ import { NavLink  } from "react-router-dom";
 export default function NavBar () {
   return (
     <header>
-      <nav className="bg-gray-800 p-4 text-white text-lg">
+      <nav className="bg-gray-800 p-4 text-white text-base">
         <ul className="flex flex-wrap gap-6 justify-around">
           <li>
             <NavLink to="/" className="hover:underline">Inicio</NavLink >
@@ -22,6 +22,9 @@ export default function NavBar () {
           </li>
           <li>
             <NavLink to="/alert" className="hover:underline">Alert</NavLink >
+          </li>
+          <li>
+            <NavLink to="/progressCircle" className="hover:underline">Progreso circular</NavLink >
           </li>
           <li>
             <NavLink to="/error404" className="hover:underline">Error 404</NavLink >
