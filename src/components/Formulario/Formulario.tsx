@@ -47,9 +47,10 @@ export default function Formulario() {
       <div className="p-4 border rounded-lg bg-secondary flex flex-col gap-4">
         <h2 className="text-2xl font-semibold">Uso</h2>
 
-        <p>A diferencia de los demás componentes del sitio, este no se invoca en una línea. En su lugar se debe analizar su estructura entera y tomar lo que te interese</p>
+        <p>A diferencia de los demás componentes del sitio, estos no se invocan en una línea. En su lugar se debe analizar su estructura entera y tomar lo que te interese</p>
 
-        <a href="https://github.com/Ale6100/Componentes-React/blob/main/src/components/Formulario/FormComponent.tsx" target="_blank" rel='noopener' className="text-blue-700">Ver código</a>
+        <a href="https://github.com/Ale6100/Componentes-React/blob/main/src/components/Formulario/FormCondicional.tsx" target="_blank" rel='noopener' className="text-blue-700">Ver código del formulario 1</a>
+        <a href="https://github.com/Ale6100/Componentes-React/blob/main/src/components/Formulario/FormComponent.tsx" target="_blank" rel='noopener' className="text-blue-700">Ver código del formulario 2</a>
       </div>
 
       <Separator />

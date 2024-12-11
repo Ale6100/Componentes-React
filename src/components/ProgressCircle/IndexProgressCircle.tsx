@@ -24,7 +24,7 @@ const IndexProgressCircle = () => {
         <ProgressCircle percentage={percentage} className="w-40" classNameNumber="text-xl"/>
       </div>
 
-      <p>Para el ejemplo decido hacer que el porcentaje cambie cada un segundo para apreciar sus distintos estados</p>
+      <p className="px-1">Para el ejemplo decidí hacer que el porcentaje cambie cada un segundo para apreciar sus distintos estados</p>
 
       <Separator />
 

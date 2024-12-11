@@ -27,7 +27,7 @@ export default function Progressindex() {
         <Button onClick={() => setFormActual(formActual + 1)} disabled={formActual === formList.length}>Siguiente</Button>
       </div>
 
-      <p>Para el ejemplo estamos dando por hecho que sólo los formularios 2 y 4 están completos, y le damos permiso al usuario de navegar entre ellos</p>
+      <p className="px-1">Para el ejemplo estamos dando por hecho que sólo los formularios 2 y 4 están completos, y le damos permiso al usuario de navegar entre ellos</p>
 
       <Separator />
 
