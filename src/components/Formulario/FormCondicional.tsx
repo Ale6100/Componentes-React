@@ -40,14 +40,9 @@ const FormCondicional = () => {
       : { username: '', alquila: defaultAlquila, estaHabitadaNoAlquila: false, razonNoAlquila: "" },
   });
 
-  const alquila = useWatch({
-    control: form.control,
-    name: "alquila",
-  });
+  const alquila = useWatch({ control: form.control, name: "alquila" });
 
-  const handleSubmit = async (values: FormSchema) => {
-    console.log('Datos enviados:', values);
-
+  const handleSubmit = async (/* values: FormSchema */) => {
     setBtnLoading(true);
     const segundosRandom = Math.floor(Math.random() * 4) + 2;
     await waitFor(segundosRandom * 1000);
@@ -67,7 +62,7 @@ const FormCondicional = () => {
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(handleSubmit, e => console.log('error', e))} className="p-10 flex flex-col gap-6 border rounded">
+      <form onSubmit={form.handleSubmit(handleSubmit)} className="p-10 flex flex-col gap-6 border rounded">
         <FormField
           control={form.control}
           name="username"
@@ -180,13 +175,13 @@ const FormCondicional = () => {
         }
         <div className="flex justify-between">
           {
-              btnLoading
-                ? <Button className="w-48" type="button" disabled>
-                    <Loader2 className="animate-spin mr-1" />
-                    Guardando
-                  </Button>
-                : <Button className="w-48" type="submit">Guardar</Button>
-            }
+            btnLoading
+              ? <Button className="w-48" type="button" disabled>
+                  <Loader2 className="animate-spin mr-1" />
+                  Guardando
+                </Button>
+              : <Button className="w-48" type="submit">Guardar</Button>
+          }
           <Button type="reset" className="w-48" onClick={() => form.reset()}>Resetear</Button>
         </div>
       </form>

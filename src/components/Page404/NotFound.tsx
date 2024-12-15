@@ -3,7 +3,21 @@ import { Button } from "@/components/ui/button"
 import { Link } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 
-export default function NotFound({ className }: { readonly className?: string }) {
+interface NotFoundProps {
+  readonly className?: string
+  readonly redirect?: string
+}
+
+/**
+ * Componente para mostrar una página de error 404 (Página no encontrada).
+ *
+ * @param {Object} props - Propiedades del componente.
+ * @param {string} [props.className] - Clase CSS adicional para personalizar el contenedor principal.
+ * @property {string} [redirect] - Si se proporciona, se renderiza un botón que redirige al valor del redirect.
+ *
+ * @returns {JSX.Element} Un componente visual que representa la página de error 404 con un diseño centrado.
+ */
+export default function NotFound({ className, redirect }: NotFoundProps): JSX.Element {
   const [ isVisible, setIsVisible ] = useState(false)
 
   useEffect(() => {
@@ -22,12 +36,16 @@ export default function NotFound({ className }: { readonly className?: string })
           <p className="text-2xl font-semibold mb-8">
             Página no encontrada
           </p>
-          <Link to="/">
-            <Button variant="secondary" size="lg" className="font-semibold border border-black hover:bg-slate-300">
-              <ArrowBigLeft className="mr-2 h-4 w-4" />
-              Volver
-            </Button>
-          </Link>
+          {redirect && (
+          <div className="flex justify-center mt-6">
+            <Link to={redirect}>
+              <Button variant="outline" size="lg" className="font-semibold text-blue-500 border-blue-500 hover:bg-blue-50 hover:text-blue-600 transition-all duration-300 shadow-md hover:shadow-lg transform">
+                <ArrowBigLeft className="mr-2 h-5 w-5" />
+                Volver
+              </Button>
+            </Link>
+          </div>
+          )}
         </div>
       </div>
     </div>

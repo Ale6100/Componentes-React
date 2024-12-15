@@ -11,6 +11,7 @@ import Page404 from "./components/Page404/Page404";
 import Progressindex from "./components/ProgressForm/ProgressIndex";
 import Tabla from "./components/tabla/Tabla";
 import IndexProgressCircle from "./components/ProgressCircle/IndexProgressCircle";
+import ErrorInternoIndex from "./components/ErrorInterno/ErrorInternoIndex";
 
 export default function App() {
   return (
@@ -32,6 +33,8 @@ export default function App() {
         <Route path="/progressCircle" element={<IndexProgressCircle />} />
 
         <Route path="/error404" element={<Page404 />} />
+
+        <Route path="/errorInterno" element={<ErrorInternoIndex />} />
 
         <Route path="/formulario" element={<Formulario />} />
 

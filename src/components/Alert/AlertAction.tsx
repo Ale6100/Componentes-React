@@ -10,6 +10,7 @@ interface AlertActionProps {
   readonly onCancel?: () => void;
   readonly accept?: string;
   readonly cancel?: string;
+  readonly btnsDisabled?: boolean;
 }
 
 /**
@@ -27,10 +28,11 @@ interface AlertActionProps {
  * @param {() => void} [props.onCancel=() => {}] - Callback que se invoca cuando el usuario hace clic en "Cancelar".
  * @param {string} [props.accept='Aceptar'] - El texto del botón de aceptar.
  * @param {string} [props.cancel='Cancelar'] - El texto del botón de cancelar.
+ * @param {boolean} [props.btnsDisabled=false] - Estado que deshabilitará los botones cuando sea true.
  *
  * @returns {JSX.Element} El componente de alerta renderizado.
  */
-export default function AlertAction({ isOpen, onOpenChange, onAccept, title, description, onCancel = () => {}, accept = 'Aceptar', cancel = 'Cancelar' }: AlertActionProps): JSX.Element {
+export default function AlertAction({ isOpen, onOpenChange, onAccept, title, description, onCancel = () => {}, accept = 'Aceptar', cancel = 'Cancelar', btnsDisabled = false }: AlertActionProps): JSX.Element {
   return (
     <AlertDialog open={isOpen} onOpenChange={onOpenChange}>
       <AlertDialogContent>
@@ -44,10 +46,10 @@ export default function AlertAction({ isOpen, onOpenChange, onAccept, title, des
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogAction onClick={onAccept}>
+          <AlertDialogAction disabled={btnsDisabled} onClick={onAccept}>
             {accept}
           </AlertDialogAction>
-          <AlertDialogCancel onClick={onCancel}>
+          <AlertDialogCancel disabled={btnsDisabled} onClick={onCancel}>
             {cancel}
           </AlertDialogCancel>
         </AlertDialogFooter>

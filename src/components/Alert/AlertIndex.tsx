@@ -70,6 +70,7 @@ const AlertIndex = () => {
         <ul className="space-y-4">
           {[
             "Se exige una función onAccept que se ejecuta al hacer clic en el botón de aceptar",
+            "Se pueden deshabilitar dinámicamente los botones de acción",
             "Se puede personalizar el texto de los botones de aceptar y cancelar",
             "Se puede personalizar el título y la descripción de la alerta",
             "Opcionalmente se puede definir una acción que se ejecuta al hacer clic en el botón de cancelar",

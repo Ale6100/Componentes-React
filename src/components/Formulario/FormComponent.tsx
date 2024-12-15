@@ -59,9 +59,7 @@ export default function FormComponent() {
     return () => clearTimeout(timer);
   }, [work]);
 
-  const handleSubmit = async (values: FormSchema) => {
-    console.log('Datos enviados:', values);
-
+  const handleSubmit = async (/* values: FormSchema */) => {
     setBtnLoading(true);
     const segundosRandom = Math.floor(Math.random() * 4) + 2;
     await waitFor(segundosRandom * 1000);

@@ -13,6 +13,7 @@ Puedes ver un ejemplo de uso de cada uno [aquí](https://miscomponentes.netlify.
 * [AlertAction.tsx](/src/components/Alert/AlertAction.tsx) | Un alert con botones de acción
 * [ProgressCircle.tsx](/src/components/ProgressCircle/ProgressCircle.tsx) | Un progreso circular
 * [NotFound.tsx](/src/components/BtnLoading/BtnLoading.tsx) | Simple página de error 404 animada
+* [ErrorInterno.tsx](/src/components/ErrorInterno/ErrorInterno.tsx) | Simple página de error 500 animada
 * [FormCondicional.tsx](/src/components/Formulario/FormCondicional.tsx) y [FormComponent.tsx](/src/components/Formulario/FormComponent.tsx) | Formularios con validaciones e inputs interesantes
 
 ## Construido con 🛠️
