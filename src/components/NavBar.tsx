@@ -54,6 +54,9 @@ export default function NavBar() {
             <NavLink to="/error404" className="hover:underline"> Error 404 </NavLink>
           </li>
           <li>
+            <NavLink to="/errorInterno" className="hover:underline"> Error Interno </NavLink>
+          </li>
+          <li>
             <NavLink to="/formulario" className="hover:underline"> Formulario </NavLink>
           </li>
         </ul>
