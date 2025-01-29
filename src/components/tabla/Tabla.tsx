@@ -11,68 +11,7 @@ import { toast } from "sonner";
 import CardData from "./CardData";
 import InfoLinks from "../InfoLinks";
 import type { InfoLink } from "@/type";
-
-const columns: ColumnDef<Data>[] = [
-  {
-    accessorKey: "id",
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Id" />
-    ),
-  },
-  {
-    accessorKey: "nombre",
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Nombre" />
-    ),
-  },
-  {
-    accessorKey: "apellido",
-    header: 'Apellido'
-  },
-  {
-    accessorKey: "email",
-    enableGlobalFilter: false,
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title="Email" />
-    ),
-  },
-  {
-    accessorKey: "pais",
-    header: ({ column }) => (
-      <DataTableColumnHeader column={column} title= "País" />
-    ),
-  },
-  {
-    accessorKey: "acciones",
-    header: "Acciones",
-    enableGlobalFilter: false,
-    cell: ({ row }) => {
-      return (
-        <DropdownMenu>
-          <div className='w-full flex justify-center'>
-            <DropdownMenuTrigger asChild>
-              <Button title='Menú de acciones' variant="ghost" size="sm" className="h-8 w-8 p-0 hover:bg-primary hover:text-primary-foreground focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-offset-0">
-                <span className="sr-only">Abrir menú de acciones</span>
-                <Settings2 className="h-4 w-4 transition-transform duration-200 ease-in-out group-hover:rotate-90" />
-              </Button>
-            </DropdownMenuTrigger>
-          </div>
-
-          <DropdownMenuContent>
-            <DropdownMenuLabel>Acciones</DropdownMenuLabel>
-            <DropdownMenuSeparator />
-            <DropdownMenuGroup>
-              <DropdownMenuItem onClick={() => toast.info(`Se pretende editar el dato con id ${row.original.id}. No funciona, es sólo un ejemplo`)} className='cursor-pointer'>Editar</DropdownMenuItem>
-              <DropdownMenuItem onClick={() => toast.info(`Se pretende eliminar el dato con id ${row.original.id}. No funciona, es sólo un ejemplo`)} className='cursor-pointer'>Eliminar</DropdownMenuItem>
-            </DropdownMenuGroup>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      )
-    }
-  }
-]
-
-const data = datos;
+import { useState } from "react";
 
 const infoLinks: InfoLink[] = [
   {
@@ -97,6 +36,85 @@ const infoLinks: InfoLink[] = [
 ]
 
 export default function Tabla() {
+  const [ data, setData ] = useState<Data[]>(datos)
+
+  const addReg = () => {
+    const newReg: Data = {
+      id: Math.floor(Math.random() * 100000),
+      nombre: "Nuevo2",
+      apellido: "Registro",
+      email: "asd@sad.com",
+      pais: "Argentina",
+    }
+
+    setData([...data, newReg])
+  }
+
+  function deleterow (id: number) {
+    const newDatas = data.filter(d => d.id !== id)
+    setData(newDatas)
+  }
+
+  const columns: ColumnDef<Data>[] = [
+    {
+      accessorKey: "id",
+      header: ({ column }) => (
+        <DataTableColumnHeader column={column} title="Id" />
+      ),
+    },
+    {
+      accessorKey: "nombre",
+      header: ({ column }) => (
+        <DataTableColumnHeader column={column} title="Nombre" />
+      ),
+    },
+    {
+      accessorKey: "apellido",
+      header: 'Apellido'
+    },
+    {
+      accessorKey: "email",
+      enableGlobalFilter: false,
+      header: ({ column }) => (
+        <DataTableColumnHeader column={column} title="Email" />
+      ),
+    },
+    {
+      accessorKey: "pais",
+      header: ({ column }) => (
+        <DataTableColumnHeader column={column} title= "País" />
+      ),
+    },
+    {
+      accessorKey: "acciones",
+      header: "Acciones",
+      enableGlobalFilter: false,
+      cell: ({ row }) => {
+        return (
+          <DropdownMenu>
+            <div className='w-full flex justify-center'>
+              <DropdownMenuTrigger asChild>
+                <Button title='Menú de acciones' variant="ghost" size="sm" className="h-8 w-8 p-0 hover:bg-primary hover:text-primary-foreground focus-visible:ring-1 focus-visible:ring-ring focus-visible:ring-offset-0">
+                  <span className="sr-only">Abrir menú de acciones</span>
+                  <Settings2 className="h-4 w-4 transition-transform duration-200 ease-in-out group-hover:rotate-90" />
+                </Button>
+              </DropdownMenuTrigger>
+            </div>
+
+            <DropdownMenuContent>
+              <DropdownMenuLabel>Acciones</DropdownMenuLabel>
+              <DropdownMenuSeparator />
+              <DropdownMenuGroup>
+                <DropdownMenuItem onClick={() => toast.info(`Se pretende editar el dato con id ${row.original.id}. No funciona, es sólo un ejemplo`)} className='cursor-pointer'>Editar</DropdownMenuItem>
+                <DropdownMenuItem onClick={() => deleterow(row.original.id)} className='cursor-pointer'>Eliminar</DropdownMenuItem>
+              </DropdownMenuGroup>
+            </DropdownMenuContent>
+          </DropdownMenu>
+        )
+      }
+    }
+  ]
+
   return (
     <section className="max-w-5xl w-full mx-auto my-4 flex flex-col gap-4 px-1">
       <h1 className="text-3xl font-bold text-center">Tabla</h1>
@@ -106,6 +124,10 @@ export default function Tabla() {
       <Card className='p-4 bg-white rounded-xl shadow-md'>
         <DataTable columns={columns} data={data} txtPlaceholderFilter="Filtrar por todo menos email" columnsHidden={['pais']} Card={CardData} registrosRemarcados={[25, 29]} />
       </Card>
+
+      <div className="flex justify-end">
+        <Button title="Simular agregado" onClick={addReg}>Agregar nuevo registro</Button>
+      </div>
 
       <Separator />
 
@@ -148,9 +170,10 @@ export default function Tabla() {
             "De manera predeterminada habrá un botón para ocultar o esconder las columnas que uno desee",
             "De manera predeterminada habrá un filtro con un ícono animado que funcionará para filtrar todos los campos. Se puede deshabilitar para campos específicos con la propiedad enableGlobalFilter",
             "De manera predeterminada habrá un paginado con un límite personalizado de 10 filas por página",
+            'De manera predeterminada en formato PC el texto de un nuevo registro se iluminará brevemente de color amarillo(*)',
             "Se puede modificar la cantidad de cantidad de números de páginas que se muestran en el paginado",
             "Se puede activar un botón en cada columna para ordenar las filas en su orden ascendente o descendente. También en ese mismo botón se puede ocultar la columna. Se activa con el componente DataTableColumnHeader",
-            "Se puede remarcar en rojo los registros que uno desee con el atributo registrosRemarcados",
+            "Se puede remarcar en rojo los registros que uno desee con el atributo registrosRemarcados(*)",
             "De manera predeterminada la reordenación de columnas incluye animaciones para mejorar la experiencia visual.",
             "Si se pasa un atributo Card de tipo componente, servirá como componente plantilla donde se renderizarán los datos de cada fila en formato mobile",
             "Es posible agregar un skeleton de carga de datos si se pasa un atributo que indique que los datos se están cargando",
@@ -163,6 +186,8 @@ export default function Tabla() {
             </li>
           ))}
         </ul>
+
+        <p className="mt-2 text-sm text-gray-500">(*): Para que esta funcionalidad se active es necesario que los datos tengan propiedad "id"</p>
       </div>
     </section>
   )

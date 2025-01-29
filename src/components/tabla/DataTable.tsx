@@ -1,7 +1,7 @@
 import { ArrowLeftCircle, ArrowRightCircle, LoaderCircle, MoreHorizontal, Search } from "lucide-react";
 import { Button } from "@/components/ui/button"
 import { ColumnDef, flexRender, getCoreRowModel, getPaginationRowModel, getSortedRowModel, SortingState, useReactTable, VisibilityState, getFilteredRowModel, Column, Row } from "@tanstack/react-table"
-import { ComponentType, isValidElement, useState } from "react"
+import { ComponentType, isValidElement, useEffect, useRef, useState } from "react"
 import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Input } from "@/components/ui/input"
 import { Skeleton } from "@/components/ui/skeleton";
@@ -59,6 +59,31 @@ export function DataTable<TData extends object, TValue>({ className, columns, da
   const [ filtering, setFiltering ] = useState<string>("")
   const isDesktop = useMediaQuery({ query: '(min-width: 1024px)' })
   const [ inputIsLoading, setInputIsLoading ] = useState(false);
+  const refData = useRef(data);
+  const refDataTable = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const previousData = refData.current;
+    const refDataTableCurrent = refDataTable.current;
+
+    if (previousData.length < data.length && refDataTableCurrent && previousData.every(d => 'id' in d) && data.every(d => 'id' in d)) {
+      const buscarNuevoId = (id: number | string) => previousData.some(d => 'id' in d && d.id === id);
+      const nuevoId = data.find(d => !buscarNuevoId(d.id as (number | string)))?.id;
+
+      if (nuevoId) {
+        const row = refDataTableCurrent.querySelector(`.row-${String(nuevoId)}`);
+        if (row) {
+          row.classList.add('animate-[brillo_3s_ease-out]');
+
+          setTimeout(() => {
+            row.classList.remove('animate-[brillo_3s_ease-out]');
+          }, 3000);
+        }
+      }
+    }
+
+    refData.current = data;
+  }, [data])
 
   const [ parent ] = useAutoAnimate()
 
@@ -119,7 +144,15 @@ export function DataTable<TData extends object, TValue>({ className, columns, da
   const pagAlrededor = parseInt(cantPaginasAlrededor);
 
   return (
-    <div className={`flex flex-col gap-4 ${className ?? ""}`}>
+    <div ref={refDataTable} className={`flex flex-col gap-4 ${className ?? ""}`}>
+      <style>{`
+        @keyframes brillo {
+          50% {
+            text-shadow: 0 0 5px rgba(255, 255, 0, 1);
+          }
+        }
+      `}
+      </style>
       <div className="flex gap-4 max-[360px]:flex-col-reverse">
         <div className="relative w-full">
           <div className="pointer-events-none absolute inset-y-0 start-0 flex items-center justify-center ps-3 text-muted-foreground/80 peer-disabled:opacity-50">
@@ -196,7 +229,7 @@ export function DataTable<TData extends object, TValue>({ className, columns, da
                   <TableRow
                     key={row.id}
                     data-state={row.getIsSelected() && "selected"}
-                    className={registrosRemarcados.some(r => 'id' in row.original && r === row.original.id) ? 'bg-red-300' : ''}
+                    className={`${registrosRemarcados.some(r => "id" in row.original && r === row.original.id) ? 'bg-red-300' : ''} ${"id" in row.original ? `row-${row.original.id}` : ''}`}
                   >
                     {row.getVisibleCells().map((cell) => (
                       <TableCell key={cell.id}>
