@@ -170,7 +170,7 @@ export default function Tabla() {
             "De manera predeterminada habrá un botón para ocultar o esconder las columnas que uno desee",
             "De manera predeterminada habrá un filtro con un ícono animado que funcionará para filtrar todos los campos. Se puede deshabilitar para campos específicos con la propiedad enableGlobalFilter",
             "De manera predeterminada habrá un paginado con un límite personalizado de 10 filas por página",
-            'De manera predeterminada en formato PC el texto de un nuevo registro se iluminará brevemente de color amarillo(*)',
+            'De manera predeterminada en formato PC, el texto de un nuevo registro (con excepción del primero) se iluminará brevemente de color amarillo(*)',
             "Se puede modificar la cantidad de cantidad de números de páginas que se muestran en el paginado",
             "Se puede activar un botón en cada columna para ordenar las filas en su orden ascendente o descendente. También en ese mismo botón se puede ocultar la columna. Se activa con el componente DataTableColumnHeader",
             "Se puede remarcar en rojo los registros que uno desee con el atributo registrosRemarcados(*)",

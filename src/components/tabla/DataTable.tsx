@@ -63,10 +63,12 @@ export function DataTable<TData extends object, TValue>({ className, columns, da
   const refDataTable = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    // Animación de resaltado de fila al agregar un nuevo registro. Solo se aplica si los datos tienen una propiedad id y si la tabla ya tiene datos
     const previousData = refData.current;
     const refDataTableCurrent = refDataTable.current;
 
-    if (previousData.length < data.length && refDataTableCurrent && previousData.every(d => 'id' in d) && data.every(d => 'id' in d)) {
+    const seAgregoUnElementoYNoEsElPrimero = previousData.length+1 === data.length && data.length !== 1;
+    if (seAgregoUnElementoYNoEsElPrimero && refDataTableCurrent && previousData.every(d => 'id' in d) && data.every(d => 'id' in d)) {
       const buscarNuevoId = (id: number | string) => previousData.some(d => 'id' in d && d.id === id);
       const nuevoId = data.find(d => !buscarNuevoId(d.id as (number | string)))?.id;
 
@@ -158,7 +160,7 @@ export function DataTable<TData extends object, TValue>({ className, columns, da
           <div className="pointer-events-none absolute inset-y-0 start-0 flex items-center justify-center ps-3 text-muted-foreground/80 peer-disabled:opacity-50">
             {
               inputIsLoading ?
-                <LoaderCircle className="animate-spin" size={16} strokeWidth={2} aria-hidden="true" role="presentation" />
+                <LoaderCircle className="animate-spin" size={16} strokeWidth={2} aria-hidden="true" />
                 :
                 <Search size={16} strokeWidth={2} />
             }
