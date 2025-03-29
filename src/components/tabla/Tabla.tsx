@@ -12,6 +12,7 @@ import CardData from "./CardData";
 import InfoLinks from "../InfoLinks";
 import type { InfoLink } from "@/type";
 import { useState } from "react";
+import { stringAleatorio } from "@/lib/utils";
 
 const infoLinks: InfoLink[] = [
   {
@@ -41,10 +42,10 @@ export default function Tabla() {
   const addReg = () => {
     const newReg: Data = {
       id: Math.floor(Math.random() * 100000),
-      nombre: "Nuevo2",
-      apellido: "Registro",
-      email: "asd@sad.com",
-      pais: "Argentina",
+      nombre: stringAleatorio(3, 7),
+      apellido: stringAleatorio(3, 7),
+      email: `${stringAleatorio(2, 4)}@${stringAleatorio(2, 4)}.com`,
+      pais: stringAleatorio(3, 7),
     }
 
     setData([...data, newReg])

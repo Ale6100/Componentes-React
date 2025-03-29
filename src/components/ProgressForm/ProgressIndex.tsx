@@ -8,17 +8,17 @@ export default function Progressindex() {
   const [ formActual, setFormActual ] = useState(1)
 
   const formList = [
-    { id: 1, label: 'Formulario 1', completado: false },
-    { id: 2, label: 'Formulario 2', completado: true },
-    { id: 3, label: 'Formulario 3', completado: false },
-    { id: 4, label: 'Formulario 4', completado: true },
+    { id: 1, label: 'Formulario 1', completado: true, url: '' },
+    { id: 2, label: 'Formulario 2', completado: true, url: '' },
+    { id: 3, label: 'Formulario 3', completado: false, url: '' },
+    { id: 4, label: 'Formulario 4', completado: true, url: '' },
   ]
 
   return (
     <section className="max-w-5xl w-full mx-auto my-4  flex flex-col gap-4 px-1">
       <h1 className="text-3xl font-bold text-center">Progreso entre formularios</h1>
 
-      <p className="text-center">Componente que te dice en cuál formulario estás</p>
+      <p className="text-center">Navegación linkeable que te dice en cuál formulario estás</p>
 
       <ProgressForm formList={formList} formActual={formActual} />
 
@@ -27,7 +27,7 @@ export default function Progressindex() {
         <Button onClick={() => setFormActual(formActual + 1)} disabled={formActual === formList.length}>Siguiente</Button>
       </div>
 
-      <p className="px-1">Para el ejemplo estamos dando por hecho que sólo los formularios 2 y 4 están completos, y le damos permiso al usuario de navegar entre ellos</p>
+      <p className="px-1">Para el ejemplo estamos dando por hecho que los formularios 1, 2 y 4 están completos, y le damos permiso al usuario de navegar entre ellos</p>
 
       <Separator />
 
@@ -58,6 +58,7 @@ export default function Progressindex() {
             "Te indica en cuál formulario estás",
             "Te indica cuáles formularios tenés pendientes",
             "Te indica cuáles formularios ya completaste",
+            "La navegación permite enlazar desde el primer formulario hasta el anterior del primero incompleto",
           ].map(item => (
             <li key={item} className="flex items-start">
               <CheckCircle className="h-5 w-5 text-primary mr-2 mt-1 flex-shrink-0" />

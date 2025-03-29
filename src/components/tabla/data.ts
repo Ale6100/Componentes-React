@@ -2,7 +2,7 @@ export type Data = {
   id: number;
   nombre: string;
   apellido: string;
-  email: `${string}@${string}.${string}`;
+  email: string;
   pais: string;
 }
 

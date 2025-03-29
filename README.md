@@ -28,6 +28,7 @@ Puedes ver un ejemplo de uso de cada uno [aquí](https://miscomponentes.netlify.
 * [react-hook-form](https://react-hook-form.com/)
 * [zod-fixture](https://github.com/timdeschryver/zod-fixture)
 * [Sonner](https://sonner.emilkowal.ski/getting-started)
+* [@formkit/auto-animate](https://auto-animate.formkit.com)
 
 ## Autor ✒️
 

@@ -1,6 +1,6 @@
 import { ArrowLeftCircle, ArrowRightCircle, LoaderCircle, MoreHorizontal, Search } from "lucide-react";
 import { Button } from "@/components/ui/button"
-import { ColumnDef, flexRender, getCoreRowModel, getPaginationRowModel, getSortedRowModel, SortingState, useReactTable, VisibilityState, getFilteredRowModel, Column, Row } from "@tanstack/react-table"
+import { ColumnDef, flexRender, getCoreRowModel, getPaginationRowModel, getSortedRowModel, SortingState, useReactTable, VisibilityState, getFilteredRowModel, Column, Row, SortingFn } from "@tanstack/react-table"
 import { ComponentType, isValidElement, useEffect, useRef, useState } from "react"
 import { DropdownMenu, DropdownMenuCheckboxItem, DropdownMenuContent, DropdownMenuTrigger } from "@/components/ui/dropdown-menu"
 import { Input } from "@/components/ui/input"
@@ -20,6 +20,9 @@ interface DataTableProps<TData , TValue> {
   pageSize?: number;
   cantPaginasAlrededor?: `${number}`;
   registrosRemarcados?: number[];
+  sorting?: SortingState;
+  sortingFns?: Record<string, SortingFn<TData>>;
+  minWidthTable?: number;
 }
 
 const TableSkeleton = () => (
@@ -50,15 +53,19 @@ const TableSkeleton = () => (
  * @param {number} [props.pageSize=10] - Número de filas por página.
  * @param {string} [props.cantPaginasAlrededor='2'] - Cantidad de páginas alrededor de la página actual a mostrar en la paginación.
  * @param {number[]} [props.registrosRemarcados=[]] - Lista de IDs de registros que se destacarán en la tabla. Para que esta funcionalidad sea efectiva los datos deben incluir una propiedad id.
+ * @param {SortingState} [props.sorting=[]] - Estado inicial de la ordenación de las columnas.
+ * @param {Record<string, SortingFn<any>>} [props.sortingFns={}] - Funciones de ordenación personalizadas para columnas específicas.
+ * @param {number} [props.minWidthTable=1024] - Ancho mínimo de la tabla para mostrar la tabla en lugar de las Cards.
  *
  * @returns {JSX.Element} - Componente de tabla interactivo.
  */
-export function DataTable<TData extends object, TValue>({ className, columns, data, Card, txtPlaceholderFilter = "Filtrar...", columnsHidden = [], dataLoading = false, pageSize = 10, cantPaginasAlrededor = '2', registrosRemarcados = []}: Readonly<DataTableProps<TData, TValue>>): JSX.Element {
-  const [ sorting, setSorting ] = useState<SortingState>([])
+export function DataTable<TData extends object, TValue>({ className, columns, data, Card, txtPlaceholderFilter = "Filtrar...", columnsHidden = [], dataLoading = false, pageSize = 10, cantPaginasAlrededor = '2', registrosRemarcados = [], sorting = [], sortingFns = {}, minWidthTable = 1024 }: Readonly<DataTableProps<TData, TValue>>): JSX.Element {
+  const [ sortingData, setSortingData ] = useState<SortingState>(sorting)
   const [ columnVisibility, setColumnVisibility ] = useState<VisibilityState>(columnsHidden.reduce((acc, column) => ({ ...acc, [column]: false }), {}))
   const [ filtering, setFiltering ] = useState<string>("")
-  const isDesktop = useMediaQuery({ query: '(min-width: 1024px)' })
+  const isDesktop = useMediaQuery({ minWidth: minWidthTable })
   const [ inputIsLoading, setInputIsLoading ] = useState(false);
+
   const refData = useRef(data);
   const refDataTable = useRef<HTMLDivElement>(null);
 
@@ -67,25 +74,27 @@ export function DataTable<TData extends object, TValue>({ className, columns, da
     const previousData = refData.current;
     const refDataTableCurrent = refDataTable.current;
 
-    const seAgregoUnElementoYNoEsElPrimero = previousData.length+1 === data.length && data.length !== 1;
-    if (seAgregoUnElementoYNoEsElPrimero && refDataTableCurrent && previousData.every(d => 'id' in d) && data.every(d => 'id' in d)) {
-      const buscarNuevoId = (id: number | string) => previousData.some(d => 'id' in d && d.id === id);
-      const nuevoId = data.find(d => !buscarNuevoId(d.id as (number | string)))?.id;
+    if (previousData != undefined && data != undefined) {
+      const seAgregoUnElementoYNoEsElPrimero = previousData.length+1 === data.length && data.length !== 1;
+      if (seAgregoUnElementoYNoEsElPrimero && refDataTableCurrent && previousData.every(d => 'id' in d) && data.every(d => 'id' in d)) {
+        const buscarNuevoId = (id: number | string) => previousData.some(d => 'id' in d && d.id === id);
+        const nuevoId = data.find(d => !buscarNuevoId(d.id as (number | string)))?.id;
 
-      if (nuevoId) {
-        const row = refDataTableCurrent.querySelector(`.row-${String(nuevoId)}`);
-        if (row) {
-          row.classList.add('animate-[brillo_3s_ease-out]');
+        if (nuevoId && (typeof nuevoId === 'string' || typeof nuevoId === 'number')) {
+          const row = refDataTableCurrent.querySelector(`.row-${nuevoId}`);
+          if (row) {
+            row.classList.add('animate-[brillo_3s_ease-out]');
 
-          setTimeout(() => {
-            row.classList.remove('animate-[brillo_3s_ease-out]');
-          }, 3000);
+            setTimeout(() => {
+              row.classList.remove('animate-[brillo_3s_ease-out]');
+            }, 3000);
+          }
         }
       }
-    }
 
-    refData.current = data;
-  }, [data])
+      refData.current = data;
+    }
+  }, [data]);
 
   const [ parent ] = useAutoAnimate()
 
@@ -95,12 +104,12 @@ export function DataTable<TData extends object, TValue>({ className, columns, da
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     onColumnVisibilityChange: setColumnVisibility,
-    onSortingChange: setSorting,
+    onSortingChange: setSortingData,
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     state: {
       columnVisibility,
-      sorting,
+      sorting: sortingData,
       globalFilter: filtering,
     },
     onGlobalFilterChange: setFiltering,
@@ -110,6 +119,7 @@ export function DataTable<TData extends object, TValue>({ className, columns, da
         pageSize,
       },
     },
+    sortingFns
   })
 
   /**
